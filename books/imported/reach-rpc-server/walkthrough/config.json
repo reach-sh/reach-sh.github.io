@@ -1,0 +1,14 @@
+{
+  "author": null,
+  "bookPath": "books/imported",
+  "bookTitle": "Reach Original Docs",
+  "chapters": null,
+  "hasOtp": true,
+  "hasPageHeader": true,
+  "hasPageScrollbar": true,
+  "menuItem": "mi-docs",
+  "pages": null,
+  "pathname": "/Users/matt/repositories/reach-lang/dev/books/imported/reach-rpc-server/walkthrough",
+  "publishedDate": null,
+  "title": "Reach RPC Protocol Client Implementation Walkthrough"
+}

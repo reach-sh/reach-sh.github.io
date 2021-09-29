@@ -1,0 +1,70 @@
+<p>The directions below show you how to build and run a sample Reach decentralized application (DApp).</p>
+<h1 id="prerequisites">Prerequisites</h1>
+<ol>
+  <li>
+    <p>Install <a href="https://www.gnu.org/software/make/">GNU Make</a>, or verify your fairly up-to-date installation:</p>
+    <pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ make -v</li><li value="2">GNU Make 4.3</li></ol></pre>
+  </li>
+  <li>
+    <p>Install <a href="https://docs.docker.com/get-docker/">Docker</a>, or verify your fairly up-to-date installation:</p>
+    <pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ docker -v</li><li value="2">Docker version 20.10.5</li></ol></pre>
+  </li>
+</ol>
+<h1 id="install-reach">Install Reach</h1>
+<ol>
+  <li>
+    <p>Create a <em>reach</em> directory:</p>
+    <pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ mkdir ~/reach</li><li value="2">$ cd ~/reach</li></ol></pre>
+  </li>
+  <li>
+    <p>Download the <a href="https://github.com/reach-sh/reach-lang/blob/master/reach">reach</a> script to the <em>reach</em> directory:</p>
+    <pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ curl https://docs.reach.sh/reach -o reach ; chmod +x reach</li></ol></pre>
+  </li>
+  <li>
+    <p>Verify that you can run the reach script:</p>
+    <pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ reach -v</li><li value="2">reach 0.1</li></ol></pre>
+    <p>Optionally, to be able to run the <em>reach</em> script from any directory, add <em>reach</em> to the PATH variable in your shell startup file (e.g. <code>PATH=~/reach:$PATH</code>), and then rerun your startup file (e.g. close/open your terminal or run <a href="https://en.wikipedia.org/wiki/Dot_(command)">source</a>).</p>
+  </li>
+  <li>
+    <p>Download Reach Docker images:</p>
+    <pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ reach update</li></ol></pre>
+  </li>
+</ol>
+<h1 id="install-vscode">Install VSCode</h1>
+<ol>
+  <li>
+    <p>Install <a href="https://code.visualstudio.com/">Visual Studio Code</a>.</p>
+  </li>
+  <li>
+    <p>In vscode, open <code>~/reach</code>:</p>
+    <p>
+      <img src="/books/essentials/quick-start/vscode.png" class="img-fluid" width="560" loading="lazy">
+    </p>
+  </li>
+  <li>
+    <p>Install the <a href="https://marketplace.visualstudio.com/items?itemName=reachsh.reach-ide">Reach extension</a>:</p>
+    <p>
+      <img src="/books/essentials/quick-start/vscode-reach-ext.png" class="img-fluid" width="560" loading="lazy">
+    </p>
+  </li>
+</ol>
+<h1 id="create-a-project">Create a project</h1>
+<ol>
+  <li>
+    <p>Create a <em>wisdom-for-sale</em> project folder:</p>
+    <p>
+      <img src="/books/essentials/quick-start/vscode-project-folder.png" class="img-fluid" width="560" loading="lazy">
+    </p>
+  </li>
+  <li>
+    <p>Run <code>reach init</code> to create the source files for a simple Reach program:</p>
+    <p>
+      <img src="/books/essentials/quick-start/vscode-reach-init.png" class="img-fluid" width="560" loading="lazy">
+    </p>
+  </li>
+</ol>
+<h1 id="compile-verify-and-run">Compile, verify, and run</h1>
+<pre class="snippet numbered"><ol class="snippet"><li value="1">$ reach run</li><li value="2">$ REACH_CONNECTOR_MODE=ETH-devnet reach run</li><li value="3">Verifying knowledge assertions</li><li value="4">Verifying for generic connector</li><li value="5">  Verifying when ALL participants are honest</li><li value="6">  Verifying when NO participants are honest</li><li value="7">  Verifying when ONLY "Alice" is honest</li><li value="8">  Verifying when ONLY "Bob" is honest</li><li value="9">Checked 4 theorems; No failures!</li><li value="10">[+] Building 0.2s (7/7) FINISHED     </li><li value="11"> =&gt; [internal] load build definition from Dockerfile</li><li value="12"> =&gt; =&gt; transferring dockerfile: 234B </li><li value="13"> =&gt; [internal] load .dockerignore</li><li value="14"> =&gt; =&gt; transferring context: 75B </li><li value="15"> =&gt; [internal] load metadata for docker.io/reachsh/runner:0.1.5</li><li value="16"> =&gt; [internal] load build context</li><li value="17"> =&gt; =&gt; transferring context: 4.90kB  </li><li value="18"> =&gt; CACHED [1/2] FROM docker.io/reachsh/runner:0.1.5</li><li value="19"> =&gt; [2/2] COPY . /app </li><li value="20"> =&gt; exporting to image</li><li value="21"> =&gt; =&gt; exporting layers   </li><li value="22"> =&gt; =&gt; writing image sha256:110953e2319564c0337b3c872189bd59e2ff37c45238fbb1b8ce431081297103 </li><li value="23"> =&gt; =&gt; naming to docker.io/reachsh/reach-app-wisdom-for-sale:latest</li><li value="24"></li><li value="25">Use 'docker scan' to run Snyk tests against images to find vulnerabilities and learn how to fix them</li><li value="26">Creating reach2021-09-28t12-25-14z-zgjo_reach-app-wisdom-for-sale_run ... done</li><li value="27"></li><li value="28">&gt; @reach-sh/wisdom-for-sale@ index /app</li><li value="29">&gt; node --experimental-modules --unhandled-rejections=strict index.mjs</li><li value="30"></li><li value="31">Hello, Alice and Bob!</li><li value="32">Launching...</li><li value="33">Starting backends...</li><li value="34">Goodbye, Alice and Bob!</li></ol></pre>
+<pre class="snippet numbered"><ol class="snippet"><li value="1">$ REACH_CONNECTOR_MODE=ALGO-devnet reach run</li><li value="2">Verifying knowledge assertions</li><li value="3">Verifying for generic connector</li><li value="4">  Verifying when ALL participants are honest</li><li value="5">  Verifying when NO participants are honest</li><li value="6">  Verifying when ONLY "Alice" is honest</li><li value="7">  Verifying when ONLY "Bob" is honest</li><li value="8">Checked 4 theorems; No failures!</li><li value="9">[+] Building 0.2s (7/7) FINISHED     </li><li value="10"> =&gt; [internal] load build definition from Dockerfile      </li><li value="11"> =&gt; =&gt; transferring dockerfile: 234B</li><li value="12"> =&gt; [internal] load .dockerignore   </li><li value="13"> =&gt; =&gt; transferring context: 75B    </li><li value="14"> =&gt; [internal] load metadata for docker.io/reachsh/runner:0.1.5      </li><li value="15"> =&gt; CACHED [1/2] FROM docker.io/reachsh/runner:0.1.5      </li><li value="16"> =&gt; [internal] load build context   </li><li value="17"> =&gt; =&gt; transferring context: 4.90kB </li><li value="18"> =&gt; [2/2] COPY . /app    </li><li value="19"> =&gt; exporting to image   </li><li value="20"> =&gt; =&gt; exporting layers  </li><li value="21"> =&gt; =&gt; writing image sha256:2ece3525a17f6e9b76934e99076221528f91e9b8f00e18c3fc6635b0d1b74429 0.0s</li><li value="22"> =&gt; =&gt; naming to docker.io/reachsh/reach-app-wisdom-for-sale:latest  </li><li value="23"></li><li value="24">Use 'docker scan' to run Snyk tests against images to find vulnerabilities and learn how to fix them</li><li value="25">Pulling devnet-algo-pg (postgres:11-alpine)...</li><li value="26">11-alpine: Pulling from library/postgres</li><li value="27">a0d0a0d46f8b: Already exists</li><li value="28">5034a66b99e6: Pull complete</li><li value="29">82e9eb77798b: Pull complete</li><li value="30">351ed8634988: Pull complete</li><li value="31">18d059d16088: Pull complete</li><li value="32">4e934fbe90b5: Pull complete</li><li value="33">faca3cd3c3fd: Pull complete</li><li value="34">e884a1e228ac: Pull complete</li><li value="35">Digest: sha256:f811f9f9dd96568118fc9f274a6d353b2ab30851d961e8bf8fd69c781c545fd3</li><li value="36">Status: Downloaded newer image for postgres:11-alpine</li><li value="37">Creating reach-devnet-algo-pg ... done</li><li value="38">Creating reach-devnet-algo    ... done</li><li value="39">Creating reach2021-09-28t12-45-31z-kvsp_reach-app-wisdom-for-sale_run ... done</li><li value="40"></li><li value="41">&gt; @reach-sh/wisdom-for-sale@ index /app</li><li value="42">&gt; node --experimental-modules --unhandled-rejections=strict index.mjs</li><li value="43"></li><li value="44">Hello, Alice and Bob!</li><li value="45">Launching...</li><li value="46">Starting backends...</li><li value="47">Goodbye, Alice and Bob!</li></ol></pre>
+<pre class="snippet numbered"><ol class="snippet"><li value="1">$ REACH_CONNECTOR_MODE=CFX-devnet reach run</li><li value="2">Verifying knowledge assertions</li><li value="3">Verifying for generic connector</li><li value="4">  Verifying when ALL participants are honest</li><li value="5">  Verifying when NO participants are honest</li><li value="6">  Verifying when ONLY "Alice" is honest</li><li value="7">  Verifying when ONLY "Bob" is honest</li><li value="8">Checked 4 theorems; No failures!</li><li value="9">[+] Building 0.2s (7/7) FINISHED </li><li value="10"> =&gt; [internal] load build definition from Dockerfile      </li><li value="11"> =&gt; =&gt; transferring dockerfile: 234B   </li><li value="12"> =&gt; [internal] load .dockerignore      </li><li value="13"> =&gt; =&gt; transferring context: 75B</li><li value="14"> =&gt; [internal] load metadata for docker.io/reachsh/runner:0.1.5</li><li value="15"> =&gt; CACHED [1/2] FROM docker.io/reachsh/runner:0.1.5      </li><li value="16"> =&gt; [internal] load build context      </li><li value="17"> =&gt; =&gt; transferring context: 4.90kB    </li><li value="18"> =&gt; [2/2] COPY . /app    </li><li value="19"> =&gt; exporting to image   </li><li value="20"> =&gt; =&gt; exporting layers  </li><li value="21"> =&gt; =&gt; writing image sha256:f5c034267578ab31c13cbe38e6553a3fc698ed8454512b145b4c0def393d213d    </li><li value="22"> =&gt; =&gt; naming to docker.io/reachsh/reach-app-wisdom-for-sale:latest   </li><li value="23"></li><li value="24">Use 'docker scan' to run Snyk tests against images to find vulnerabilities and learn how to fix them</li><li value="25">Creating reach-devnet-cfx ... done</li><li value="26">Creating reach2021-09-28t12-50-13z-uiho_reach-app-wisdom-for-sale_run ... done</li><li value="27"></li><li value="28">&gt; @reach-sh/wisdom-for-sale@ index /app</li><li value="29">&gt; node --experimental-modules --unhandled-rejections=strict index.mjs</li><li value="30"></li><li value="31">Hello, Alice and Bob!</li><li value="32">Launching...</li><li value="33">Starting backends...</li><li value="34">Goodbye, Alice and Bob!</li></ol></pre>
+<h1 id="add-a-web-interface">Add a web interface</h1>
