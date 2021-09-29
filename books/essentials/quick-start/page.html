@@ -2,11 +2,11 @@
 <h1 id="prerequisites">Prerequisites</h1>
 <ol>
   <li>
-    <p>Install <a href="https://www.gnu.org/software/make/">GNU Make</a>, or verify your fairly up-to-date installation:</p>
+    <p>Install <a href="https://www.gnu.org/software/make/">GNU Make</a>:</p>
     <pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ make -v</li><li value="2">GNU Make 4.3</li></ol></pre>
   </li>
   <li>
-    <p>Install <a href="https://docs.docker.com/get-docker/">Docker</a>, or verify your fairly up-to-date installation:</p>
+    <p>Install <a href="https://docs.docker.com/get-docker/">Docker</a>:</p>
     <pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ docker -v</li><li value="2">Docker version 20.10.5</li></ol></pre>
   </li>
 </ol>
@@ -22,14 +22,17 @@
   </li>
   <li>
     <p>Verify that you can run the reach script:</p>
-    <pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ reach -v</li><li value="2">reach 0.1</li></ol></pre>
-    <p>Optionally, to be able to run the <em>reach</em> script from any directory, add <em>reach</em> to the PATH variable in your shell startup file (e.g. <code>PATH=~/reach:$PATH</code>), and then rerun your startup file (e.g. close/open your terminal or run <a href="https://en.wikipedia.org/wiki/Dot_(command)">source</a>).</p>
+    <pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ ./reach version</li><li value="2">reach 0.1</li></ol></pre>
   </li>
   <li>
     <p>Download Reach Docker images:</p>
-    <pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ reach update</li></ol></pre>
+    <pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ ./reach update</li></ol></pre>
   </li>
 </ol>
+<blockquote>
+  <h4 id="important">Important</h4>
+  <p>Many examples use <code>reach [command]</code> instead of <code>./reach [command]</code> or <code>~/reach/reach [command]</code>. You can do this by including <code>~/reach</code> in your <code>PATH</code> variable. For example, add <code>PATH=~/reach:$PATH</code> to your startup file (e.g. <code>.bashrc</code>, <code>.zshrc</code>, etc.). Be sure to rerun your startup file by closing/opening your terminal or running <a href="https://en.wikipedia.org/wiki/Dot_(command)">source</a> (e.g. <code>source .zshrc</code>). Once you do this, you can run <code>reach</code> from any current working directory.</p>
+</blockquote>
 <h1 id="install-vscode">Install VSCode</h1>
 <ol>
   <li>
@@ -38,29 +41,26 @@
   <li>
     <p>In vscode, open <code>~/reach</code>:</p>
     <p>
-      <img src="/books/essentials/quick-start/vscode.png" class="img-fluid" width="560" loading="lazy">
+      <img src="/books/essentials/quick-start/vscode.png" class="img-fluid" width="780" loading="lazy">
     </p>
   </li>
   <li>
     <p>Install the <a href="https://marketplace.visualstudio.com/items?itemName=reachsh.reach-ide">Reach extension</a>:</p>
     <p>
-      <img src="/books/essentials/quick-start/vscode-reach-ext.png" class="img-fluid" width="560" loading="lazy">
+      <img src="/books/essentials/quick-start/vscode-reach-ext.png" class="img-fluid" width="780" loading="lazy">
     </p>
   </li>
 </ol>
-<h1 id="create-a-project">Create a project</h1>
+<h1 id="clone-a-project">Clone a project</h1>
 <ol>
   <li>
-    <p>Create a <em>wisdom-for-sale</em> project folder:</p>
+    <p>Run <code>git clone https://github.com/hagenhaus/wisdom-for-sale.git</code>:</p>
     <p>
-      <img src="/books/essentials/quick-start/vscode-project-folder.png" class="img-fluid" width="560" loading="lazy">
+      <img src="/books/essentials/quick-start/vscode-clone-wfs.png" class="img-fluid" width="780" loading="lazy">
     </p>
   </li>
   <li>
-    <p>Run <code>reach init</code> to create the source files for a simple Reach program:</p>
-    <p>
-      <img src="/books/essentials/quick-start/vscode-reach-init.png" class="img-fluid" width="560" loading="lazy">
-    </p>
+    <p>sss</p>
   </li>
 </ol>
 <h1 id="compile-verify-and-run">Compile, verify, and run</h1>
