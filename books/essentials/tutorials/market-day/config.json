@@ -3,12 +3,12 @@
   "bookPath": "books/essentials",
   "bookTitle": "Reach Essentials",
   "chapters": null,
-  "hasOtp": false,
+  "hasOtp": true,
   "hasPageHeader": true,
   "hasPageScrollbar": true,
   "menuItem": "mi-docs",
   "pages": null,
-  "pathname": "/Users/matt/repositories/reach-lang/dev/books/essentials/tutorials",
+  "pathname": "/Users/matt/repositories/reach-lang/dev/books/essentials/tutorials/market-day",
   "publishedDate": null,
-  "title": "Tutorials"
+  "title": "Market Day"
 }
