@@ -1,0 +1,65 @@
+<p>This page shows you how to run a Reach <em>Hello World</em> decentralized application (DApp) in a terminal:</p>
+<h2 id="install-prerequisites">Install prerequisites</h2>
+<ol>
+  <li>
+    <p>Install <a href="https://www.gnu.org/software/make/">GNU Make</a> or verify your installation:</p>
+    <pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ make -v</li><li value="2">GNU Make 4.3</li></ol></pre>
+  </li>
+  <li>
+    <p>Install <a href="https://docs.docker.com/get-docker/">Docker</a> or verify your installation:</p>
+    <pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ docker -v</li><li value="2">Docker version 20.10.5</li></ol></pre>
+  </li>
+</ol>
+<h2 id="install-reach">Install Reach</h2>
+<ol>
+  <li>
+    <p>Create a <em>reach</em> directory:</p>
+    <pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ mkdir ~/reach</li><li value="2">$ cd ~/reach</li></ol></pre>
+  </li>
+  <li>
+    <p>Download the <a href="https://github.com/reach-sh/reach-lang/blob/master/reach">reach</a> script to the <em>reach</em> directory:</p>
+    <pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ curl https://docs.reach.sh/reach -o reach ; chmod +x reach</li></ol></pre>
+  </li>
+  <li>
+    <p>Verify that you can run the reach script:</p>
+    <pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ ./reach version</li><li value="2">reach 0.1</li></ol></pre>
+  </li>
+  <li>
+    <p>Download Reach Docker images:</p>
+    <pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ ./reach update</li></ol></pre>
+  </li>
+</ol>
+<h2 id="create-the-app">Create the app</h2>
+<ol>
+  <li>
+    <p>Create a project subfolder (as a child of <code>~/reach</code>):</p>
+    <pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ mkdir hello-world</li><li value="2">$ cd hello-world</li></ol></pre>
+  </li>
+  <li>
+    <p>Create source files:</p>
+    <pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ ~/reach/reach init</li><li value="2">Writing index.rsh...</li><li value="3">Writing index.mjs...</li><li value="4">Done.</li></ol></pre>
+    <p><em>index.mjs</em> is the JS frontend, and <em>index.rsh</em> is the Reach backend. We defer code analysis until the <a href="/en/books/essentials/tutorials/">Tutorials</a>.</p>
+  </li>
+</ol>
+<h2 id="run-the-app">Run the app</h2>
+<ol>
+  <li>
+    <p>Run the DApp on a local dockerized Ethereum devnet:</p>
+    <pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ ~/reach/reach run</li><li value="2">...</li><li value="3">Hello, Alice and Bob!</li><li value="4">Launching...</li><li value="5">Starting backends...</li><li value="6">Goodbye, Alice and Bob!</li></ol></pre>
+    <p>You could also use <code>REACH_CONNECTOR_MODE=ETH-devnet ~/reach/reach run</code>.</p>
+  </li>
+  <li>
+    <p>Run the DApp on a local dockerized Algorand devnet:</p>
+    <pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ REACH_CONNECTOR_MODE=ALGO-devnet ~/reach/reach run</li><li value="2">...</li><li value="3">Hello, Alice and Bob!</li><li value="4">Launching...</li><li value="5">Starting backends...</li><li value="6">Goodbye, Alice and Bob!</li></ol></pre>
+  </li>
+  <li>
+    <p>Run the DApp on a local dockerized Conflux devnet:</p>
+    <pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ REACH_CONNECTOR_MODE=CFX-devnet ~/reach/reach run</li><li value="2">...</li><li value="3">Hello, Alice and Bob!</li><li value="4">Launching...</li><li value="5">Starting backends...</li><li value="6">Goodbye, Alice and Bob!</li></ol></pre>
+  </li>
+</ol>
+<h2 id="next-steps">Next Steps</h2>
+<ol>
+  <li>Watch the <a href="/en/books/essentials/">Overview Video</a> (if you haven't already).</li>
+  <li>Set up a <a href="/en/books/essentials/development-environment/">Development Environment</a>.</li>
+  <li>Start the <a href="/en/books/essentials/tutorials/">Tutorials</a>.</li>
+</ol>

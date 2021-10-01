@@ -1,0 +1,14 @@
+{
+  "author": null,
+  "bookPath": "en/books/demo",
+  "bookTitle": "Demo Book",
+  "chapters": null,
+  "hasOtp": true,
+  "hasPageHeader": true,
+  "hasPageScrollbar": true,
+  "menuItem": "mi-docs",
+  "pages": null,
+  "pathname": "/Users/matt/repositories/reach-developer-portal/en/books/demo/birds/warblers",
+  "publishedDate": null,
+  "title": "Warblers"
+}
