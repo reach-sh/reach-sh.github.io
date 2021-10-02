@@ -3,7 +3,7 @@
   "bookPath": null,
   "bookTitle": null,
   "chapters": null,
-  "hasOtp": true,
+  "hasOtp": false,
   "hasPageHeader": true,
   "hasPageScrollbar": true,
   "menuItem": "mi-docs",
