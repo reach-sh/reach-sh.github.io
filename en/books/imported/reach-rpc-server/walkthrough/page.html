@@ -1,0 +1,45 @@
+<p>
+  The <a href="##ref-backends-rpc-proto">Reach RPC Protocol</a> is designed to be simple to implement in languages that support HTTP and JSON interaction.
+  This document walks through the implementation of an RPC client in <a href="https://www.python.org">Python</a>.
+  An example use of this library is shown in the <a href="##tut-7-rpc">tutorial section on RPC-based frontends</a>.
+  The entire library is 80 lines of code.
+</p>
+<p>
+  The library uses a few standard Python libraries for interacting with JSON,
+  HTTP servers, and networking:
+</p>
+<p>${code("/rpc-client/py/src/reach_rpc/<strong>init</strong>.py", 1, 9)}</p>
+<p>${code("/rpc-client/py/src/reach_rpc/<strong>init</strong>.py", 11, 27)}</p>
+<p>The library provides a single function, <code>mk_rpc</code>, that accepts the ${seclink("ref-backends-rpc-opts")}.</p>
+<p>${code("/rpc-client/py/src/reach_rpc/<strong>init</strong>.py", 28, 34)}</p>
+<p>
+  It starts by observing the <code>verify</code> option and informing the Python library it uses for HTTPS interaction to turn off warnings.
+  It displays a warning to users that they should be nervous about using this setting.
+</p>
+<p>${code("/rpc-client/py/src/reach_rpc/<strong>init</strong>.py", 35, 47)}</p>
+<p>Next, it attempts to connect to the Reach RPC Server and throws an error if it does not respond quickly enough.</p>
+<p>${code("/rpc-client/py/src/reach_rpc/<strong>init</strong>.py", 52, 62)}</p>
+<p>
+  It defines a function, <code>rpc</code>, which will be returned later on, that
+  implements the protocol for synchronous value RPC methods.
+  It formats a given request, posts it, and then returns the deserialized result.
+  It prints debugging information for convenience.
+</p>
+<p>${code("/rpc-client/py/src/reach_rpc/<strong>init</strong>.py", 63, 79)}</p>
+<p>
+  It defines a function, <code>rpc_callbacks</code>, which will be returned later on, that
+  implements the protocol for interactive RPC methods.
+  On lines 64 and 65, this function inspects its third argument, <code>cbacks</code>,
+  and separates the <code>callable</code> arguments from the values and creates the
+  intermediate objects, <code>vals</code> and <code>meths</code>, to provide the RPC
+  invocation.
+  After it makes the call, in the <code>while</code> loop starting on line 68, it
+  inspects the result to determine if it is a final answer or an
+  interactive RPC callback.
+  If it is a callback, as indicated by the test on line 72, then it extracts the
+  name of the method, <code>p['m']</code>, and invokes it in the original third
+  argument, <code>cbacks</code>, with the provided arguments.
+  It replaces the <code>p</code> value with the result of that continuation invocation and continues.
+</p>
+<p>${code("/rpc-client/py/src/reach_rpc/<strong>init</strong>.py", 80, 80)}</p>
+<p>Finally, it returns <code>rpc</code> and <code>rpc_callbacks</code> to the user.</p>
