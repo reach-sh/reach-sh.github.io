@@ -15,7 +15,7 @@
   <li>2021/09/16: The concept of deployment modes has been removed and the only available behavior is what was previously the <code>firstMsg</code> deployment mode.</li>
 </ul>
 <p>
-  If you would like the old behavior, then you'll want to create a new participant class, perhaps called <code>Constructor</code>, that exists simply to run <code>Constructor.publish(); commit();</code>, but we expect that almost no one actually wants the old behavior exactly.
+  If you would like the old behavior, then you'll want to create a new participant, perhaps called <code>Constructor</code>, that exists simply to run <code>Constructor.publish(); commit();</code>, but we expect that almost no one actually wants the old behavior exactly.
   Instead, you probably want to select one of your existing participants and assign the first publication to them.
 </p>
 <ul>

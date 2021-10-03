@@ -58,21 +58,23 @@
 <p>${ref((quote js), "loadStdlib")}</p>
 <pre class="snippet numbered"><ol class="snippet"><li value="1"><span style="color: #6F42C1">loadStdlib</span><span style="color: #24292E">(env) </span><span style="color: #D73A49">=&gt;</span><span style="color: #24292E"> </span><span style="color: #005CC5">Promise</span><span style="color: #D73A49">&lt;</span><span style="color: #24292E">stdlib</span><span style="color: #D73A49">&gt;</span></li></ol></pre>
 <p>
-  Returns a Promise for a stdlib based on the provided <code>env</code> string or map.
-  In environments where the reach stdlib has implicit access to <code>process.env</code>,
+  Returns a Promise for a standard library based on the provided <code>env</code> string or map.
+  In environments where the Reach standard library has implicit access to <code>process.env</code>,
   you may omit the <code>env</code> argument, in which case <code>process.env</code> will be used.
 </p>
 <p>
-  If the reach stdlib is being used with JavaScript bundlers like webpack
-  -- as it is with React, for example --
-  then the reach stdlib does not have implicit access to <code>process.env</code>.
+  If the standard library is being used with JavaScript bundlers like Webpack
+  ---as it is with React, for example---
+  then Reach does <strong>not</strong> have implicit access to <code>process.env</code>.
   In such scenarios, we recommend that you call this function like so:
 </p>
 <pre class="snippet numbered"><ol class="snippet"><li value="1"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">reach</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #D73A49">await</span><span style="color: #24292E"> </span><span style="color: #6F42C1">loadStdlib</span><span style="color: #24292E">(process.env);</span></li></ol></pre>
+<p>Or construct a custom object that has all of the environment keys and fields you need.</p>
 <p>
-  You may instead pass in the string <code>'ETH'</code> or the string <code>'ALGO'</code>
-  to select the desired stdlib directly.
+  As a special case, you may instead pass in the string <code>'ETH'</code> or the string <code>'ALGO'</code>
+  to select the desired connector directly.
 </p>
+<hr>
 <p>
   By default, this method allows a user to load a standard library for a single connector.
   That is, this method may not be called multiple times with varying connectors.
@@ -128,8 +130,18 @@
 <hr>
 <p>${ref((quote js), "fundFromFaucet")}</p>
 <pre class="snippet numbered"><ol class="snippet"><li value="1"><span style="color: #6F42C1">fundFromFaucet</span><span style="color: #24292E">(account, balance) </span><span style="color: #D73A49">=&gt;</span><span style="color: #24292E"> </span><span style="color: #005CC5">Promise</span><span style="color: #D73A49">&lt;void&gt;</span></li></ol></pre>
-<p>Adds the given balance of network tokens to a Reach account abstraction. This can only be used in private testing scenarios, as it uses a private faucet to issue network tokens.</p>
+<p>
+  Adds the given balance of network tokens to a Reach account abstraction.
+  This can only be used in private testing scenarios,
+  as it uses a private faucet to issue network tokens,
+  as well as certain public TestNet scenarios.
+  You can use <code>canFundFromFaucet</code> to check if <code>fundFromFaucet</code> can be used.
+</p>
 <p><code>bigNumberify</code> is transparently applied to the <code>balance</code> argument.</p>
+<hr>
+<p>${ref((quote js), "canFundFromFaucet")}</p>
+<pre class="snippet numbered"><ol class="snippet"><li value="1"><span style="color: #6F42C1">canFundFromFaucet</span><span style="color: #24292E">() </span><span style="color: #D73A49">=&gt;</span><span style="color: #24292E"> </span><span style="color: #005CC5">Promise</span><span style="color: #D73A49">&lt;</span><span style="color: #24292E">boolean</span><span style="color: #D73A49">&gt;</span></li></ol></pre>
+<p>A Promise that resolves to <code>true</code> if <code>fundFromFaucet</code> can be used, <code>false</code> if not.</p>
 <hr>
 <p>${ref((quote js), "connectAccount")}</p>
 <pre class="snippet numbered"><ol class="snippet"><li value="1"><span style="color: #6F42C1">connectAccount</span><span style="color: #24292E">(networkAccount) </span><span style="color: #D73A49">=&gt;</span><span style="color: #24292E"> </span><span style="color: #005CC5">Promise</span><span style="color: #D73A49">&lt;</span><span style="color: #24292E">acc</span><span style="color: #D73A49">&gt;</span></li></ol></pre>

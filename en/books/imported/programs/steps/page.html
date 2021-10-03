@@ -59,6 +59,11 @@
 <pre class="snippet numbered"><ol class="snippet"><li value="1"><span style="color: #24292E">.</span><span style="color: #6F42C1">paySpec</span><span style="color: #24292E">([tokA, tokB])</span></li></ol></pre>
 <p>will indicate that <code>fork</code> payments should be of the format:</p>
 <pre class="snippet numbered"><ol class="snippet"><li value="1"><span style="color: #24292E">[ </span><span style="color: #005CC5">NETWORK_TOKEN_AMT</span><span style="color: #24292E">, [ amtA, tokA ], [ amtB, tokB ] ]</span></li></ol></pre>
+<p>
+  ::: note
+  Reach assumes that network tokens and non-network tokens behavior identically, but often they do not; <a href="##guide-nntoks">the article</a> discusses the causes and consequences of this.
+  :::
+</p>
 <h3 id="publish-pay-when-and-timeout"><code>publish</code>, <code>pay</code>, <code>when</code>, and <code>timeout</code></h3>
 <p>${ref((quote rsh), "publish")}${ref((quote rsh), "pay")}${ref((quote rsh), "when")}${ref((quote rsh), "timeout")}</p>
 <pre class="snippet numbered"><ol class="snippet"><li value="1"><span style="color: #24292E">Alice.</span><span style="color: #6F42C1">publish</span><span style="color: #24292E">(wagerAmount)</span></li><li value="2"><span style="color: #24292E">     .</span><span style="color: #6F42C1">pay</span><span style="color: #24292E">(wagerAmount)</span></li><li value="3"><span style="color: #24292E">     .</span><span style="color: #6F42C1">timeout</span><span style="color: #24292E">(</span><span style="color: #005CC5">DELAY</span><span style="color: #24292E">, () </span><span style="color: #D73A49">=&gt;</span><span style="color: #24292E"> {</span></li><li value="4"><span style="color: #24292E">       Bob.</span><span style="color: #6F42C1">publish</span><span style="color: #24292E">();</span></li><li value="5"><span style="color: #24292E">       </span><span style="color: #6F42C1">commit</span><span style="color: #24292E">();</span></li><li value="6"><span style="color: #24292E">       </span><span style="color: #D73A49">return</span><span style="color: #24292E"> </span><span style="color: #005CC5">false</span><span style="color: #24292E">; });</span></li></ol></pre>

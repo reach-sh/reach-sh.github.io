@@ -2,6 +2,24 @@
   This section provides an in depth explanation of the error codes produced from
   the Reach compiler.
 </p>
+<h2 id="ra0000">RA0000</h2>
+<p>
+  This error indicates that a program, targeting the Algorand connector, is attempting to
+  transfer a <code>Token</code> in the same consensus step it was created in. It is impossible
+  to perform this action because one must opt-in to receive a token on Algorand. To opt-in, one must
+  know the id, however the id of the token cannot be known until after the transaction that created it.
+</p>
+<p>The following code erroneously tries to transfer a newly created <code>Token</code>:</p>
+<pre class="snippet numbered"><ol class="snippet"><li value="1"><span style="color: #24292E">Alice.</span><span style="color: #6F42C1">publish</span><span style="color: #24292E">();</span></li><li value="2"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">tok</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #D73A49">new</span><span style="color: #24292E"> </span><span style="color: #6F42C1">Token</span><span style="color: #24292E">({ supply: </span><span style="color: #005CC5">5</span><span style="color: #24292E"> });</span></li><li value="3"><span style="color: #6F42C1">transfer</span><span style="color: #24292E">(</span><span style="color: #005CC5">5</span><span style="color: #24292E">, tok).</span><span style="color: #6F42C1">to</span><span style="color: #24292E">(Alice);</span></li><li value="4"><span style="color: #6F42C1">commit</span><span style="color: #24292E">();</span></li></ol></pre>
+<p>
+  This can be fixed by performing a <code>commit</code> after creating the token and transferring the
+  token in the next consensus step:
+</p>
+<pre class="snippet numbered"><ol class="snippet"><li value="1"><span style="color: #24292E">Alice.</span><span style="color: #6F42C1">publish</span><span style="color: #24292E">();</span></li><li value="2"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">tok</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #D73A49">new</span><span style="color: #24292E"> </span><span style="color: #6F42C1">Token</span><span style="color: #24292E">({ supply: </span><span style="color: #005CC5">5</span><span style="color: #24292E"> });</span></li><li value="3"><span style="color: #6F42C1">commit</span><span style="color: #24292E">();</span></li><li value="4"><span style="color: #24292E">Alice.interact.</span><span style="color: #6F42C1">informOfTokenId</span><span style="color: #24292E">(tok);</span></li><li value="5"><span style="color: #24292E">Alice.</span><span style="color: #6F42C1">publish</span><span style="color: #24292E">();</span></li><li value="6"><span style="color: #6F42C1">transfer</span><span style="color: #24292E">(</span><span style="color: #005CC5">5</span><span style="color: #24292E">, tok).</span><span style="color: #6F42C1">to</span><span style="color: #24292E">(Alice);</span></li><li value="7"><span style="color: #6F42C1">commit</span><span style="color: #24292E">();</span></li></ol></pre>
+<p>
+  The frontend can have <code>Alice</code> opt-in to the token in <code>informOfTokenId</code> by utilizing
+  <code>acc.tokenAccept()</code>.
+</p>
 <h2 id="rc0000">RC0000</h2>
 <p>
   This error indicates that the program uses a number that is beyond the range of acceptable numbers for the given
@@ -1156,6 +1174,16 @@
   This error indicates that you have inspected the details about a publication, such as via <code>didPublish()</code>, before there has been a publication.
   This is impossible, so the expression must be moved after the first publication.
 </p>
+<h2 id="re0120">RE0120</h2>
+<p>
+  This error indicates that an actor who is not a <code>Participant</code>, e.g. a <code>ParticipantClass</code>, is
+  attempting to make the first publication of a Reach program.
+</p>
+<p>
+  You can fix this error by assigning the first publication to one of your <code>Participant</code>s.
+  Additionally, you can create a new <code>Participant</code> to specifically perform this action.
+</p>
+<pre class="snippet numbered"><ol class="snippet"><li value="1"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">Constructor</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #6F42C1">Participant</span><span style="color: #24292E">(</span><span style="color: #032F62">'Constructor'</span><span style="color: #24292E">, {});</span></li><li value="2"><span style="color: #6A737D">// ...</span></li><li value="3"><span style="color: #6F42C1">deploy</span><span style="color: #24292E">();</span></li><li value="4"><span style="color: #24292E">Constructor.</span><span style="color: #6F42C1">publish</span><span style="color: #24292E">();</span></li><li value="5"><span style="color: #6F42C1">commit</span><span style="color: #24292E">();</span></li><li value="6"><span style="color: #6A737D">// ...</span></li></ol></pre>
 <h2 id="rep0000">REP0000</h2>
 <p>
   This error indicates that the body of a <code>while</code> loop does not make a publication before the <code>continue</code>

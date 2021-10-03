@@ -202,6 +202,11 @@
   This returns a <code>Token</code> value and deposits a <code>supply</code> amount of the new non-network tokens into the contract account associated with the DApp.
   These tokens must be destroyed by the end of the DApp.
 </p>
+<p>
+  ::: note
+  Reach assumes that network tokens and non-network tokens behavior identically, but often they do not; <a href="##guide-nntoks">this article</a> discusses the causes and consequences of this.
+  :::
+</p>
 <hr>
 <p><code>Token.burn(tok, amt)</code>, or <code>tok.burn(amt)</code>, where <code>tok</code> is a <code>Token</code> value and <code>amt</code> is a <code>UInt</code> value, may be used to ${defn("burn")} tokens in the contract account, meaning that they are utterly destroyed and can never be recovered.</p>
 <hr>
