@@ -1,0 +1,16 @@
+{
+  "author": null,
+  "bookPath": "en/books/essentials",
+  "bookTitle": "Reach Essentials",
+  "chapters": null,
+  "hasOtp": true,
+  "hasEditBtn": true,
+  "hasPageHeader": true,
+  "hasPageScrollbar": true,
+  "hasRefreshBtn": true,
+  "menuItem": "mi-docs",
+  "pages": null,
+  "pathname": "/Users/matt/repositories/reach-developer-portal/en/books/essentials/examples/fomo",
+  "publishedDate": null,
+  "title": "Workshop: Fear of Missing Out"
+}

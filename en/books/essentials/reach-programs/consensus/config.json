@@ -4,13 +4,13 @@
   "bookTitle": "Reach Essentials",
   "chapters": null,
   "hasOtp": true,
-  "hasEditBtn": false,
+  "hasEditBtn": true,
   "hasPageHeader": true,
   "hasPageScrollbar": true,
-  "hasRefreshBtn": false,
+  "hasRefreshBtn": true,
   "menuItem": "mi-docs",
   "pages": null,
-  "pathname": "/Users/matt/repositories/reach-developer-portal/en/books/essentials/reach-language/steps",
+  "pathname": "/Users/matt/repositories/reach-developer-portal/en/books/essentials/reach-programs/consensus",
   "publishedDate": null,
-  "title": "Steps"
+  "title": "Consensus Steps"
 }

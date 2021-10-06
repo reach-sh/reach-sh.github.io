@@ -4,13 +4,13 @@
   "bookTitle": "Reach Essentials",
   "chapters": null,
   "hasOtp": true,
-  "hasEditBtn": false,
+  "hasEditBtn": true,
   "hasPageHeader": true,
   "hasPageScrollbar": true,
-  "hasRefreshBtn": false,
+  "hasRefreshBtn": true,
   "menuItem": "mi-docs",
   "pages": null,
   "pathname": "/Users/matt/repositories/reach-developer-portal/en/books/essentials/examples/relay-account",
   "publishedDate": null,
-  "title": "Relay Account"
+  "title": "Workshop: Relay Account"
 }
