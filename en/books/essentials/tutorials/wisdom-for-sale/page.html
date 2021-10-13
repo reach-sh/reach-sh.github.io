@@ -16,10 +16,10 @@
 <p>Developers use the Reach programming language to write (in <em>index.rsh</em>) the pre-compiled backend code that, syntactically, follows modern JavaScript rules. Here is an appreviated sample:</p>
 <p><a href="https://github.com/hagenhaus/wisdom-for-sale/blob/master/starter/index.rsh">index.rsh</a></p>
 <pre class="snippet numbered"><ol class="snippet"><li value="1"><span style="color: #032F62">'reach 0.1'</span><span style="color: #24292E">;</span></li><li value="2"></li><li value="3"><span style="color: #D73A49">export</span><span style="color: #24292E"> </span><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">main</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> Reach.</span><span style="color: #6F42C1">App</span><span style="color: #24292E">(() </span><span style="color: #D73A49">=&gt;</span><span style="color: #24292E"> {</span></li><li value="4"><span style="color: #24292E">  </span><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">S</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #6F42C1">Participant</span><span style="color: #24292E">(</span><span style="color: #032F62">'Seller'</span><span style="color: #24292E">, {});</span></li><li value="5"><span style="color: #24292E">  </span><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">B</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #6F42C1">Participant</span><span style="color: #24292E">(</span><span style="color: #032F62">'Buyer'</span><span style="color: #24292E">, {});</span></li><li value="6"><span style="color: #24292E">  </span><span style="color: #6F42C1">deploy</span><span style="color: #24292E">();</span></li><li value="7"></li><li value="8"><span style="color: #24292E">  </span><span style="color: #6F42C1">exit</span><span style="color: #24292E">();</span></li><li value="9"><span style="color: #24292E">});</span></li></ol></pre>
-<p>The Reach compiler transforms <em>reach.rsh</em> into <em>index.main.mjs</em>, the compiled backend code composed of two parts:</p>
+<p>The Reach compiler transforms <em>reach.rsh</em> into <em>index.main.mjs</em> which is composed of two parts:</p>
 <ol>
   <li>
-    <p>The Gateway facilitates communication between your frontend and the consensus network. It is compiler-generated JavaScript:</p>
+    <p>The Compiled Backend facilitates communication between your frontend and the consensus network. It is compiler-generated JavaScript:</p>
     <pre class="snippet numbered"><ol class="snippet"><li value="1"><span style="color: #D73A49">export</span><span style="color: #24292E"> </span><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">_version</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #032F62">'0.1.5'</span><span style="color: #24292E">;</span></li><li value="2"><span style="color: #D73A49">export</span><span style="color: #24292E"> </span><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">_backendVersion</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #005CC5">3</span><span style="color: #24292E">;</span></li><li value="3"><span style="color: #D73A49">...</span></li><li value="4"><span style="color: #D73A49">export</span><span style="color: #24292E"> </span><span style="color: #D73A49">async</span><span style="color: #24292E"> </span><span style="color: #D73A49">function</span><span style="color: #24292E"> </span><span style="color: #6F42C1">Buyer</span><span style="color: #24292E">(</span><span style="color: #E36209">ctc</span><span style="color: #24292E">, </span><span style="color: #E36209">interact</span><span style="color: #24292E">) {</span></li><li value="5"><span style="color: #24292E">  </span><span style="color: #D73A49">...</span></li><li value="6"><span style="color: #24292E">};</span></li><li value="7"></li><li value="8"><span style="color: #D73A49">export</span><span style="color: #24292E"> </span><span style="color: #D73A49">async</span><span style="color: #24292E"> </span><span style="color: #D73A49">function</span><span style="color: #24292E"> </span><span style="color: #6F42C1">Seller</span><span style="color: #24292E">(</span><span style="color: #E36209">ctc</span><span style="color: #24292E">, </span><span style="color: #E36209">interact</span><span style="color: #24292E">) {</span></li><li value="9"><span style="color: #24292E">  </span><span style="color: #D73A49">...</span></li><li value="10"><span style="color: #24292E">};</span></li></ol></pre>
   </li>
   <li>
@@ -52,6 +52,7 @@
 <h2 id="indexmjs">index.mjs</h2>
 <p>Open <a href="https://github.com/hagenhaus/wisdom-for-sale/blob/master/starter/index.mjs">index.mjs</a> in vscode.</p>
 <pre class="snippet numbered"><ol class="snippet"><li value="1"><span style="color: #D73A49">import</span><span style="color: #24292E"> { loadStdlib } </span><span style="color: #D73A49">from</span><span style="color: #24292E"> </span><span style="color: #032F62">'@reach-sh/stdlib'</span><span style="color: #24292E">;</span></li><li value="2"><span style="color: #D73A49">import</span><span style="color: #24292E"> </span><span style="color: #005CC5">*</span><span style="color: #24292E"> </span><span style="color: #D73A49">as</span><span style="color: #24292E"> backend </span><span style="color: #D73A49">from</span><span style="color: #24292E"> </span><span style="color: #032F62">'./build/index.main.mjs'</span><span style="color: #24292E">;</span></li><li value="3"><span style="color: #D73A49">import</span><span style="color: #24292E"> { ask, yesno, done } </span><span style="color: #D73A49">from</span><span style="color: #24292E"> </span><span style="color: #032F62">'@reach-sh/stdlib/ask.mjs'</span><span style="color: #24292E">;</span></li><li value="4"></li><li value="5"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">stdlib</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #6F42C1">loadStdlib</span><span style="color: #24292E">(process.env);</span></li><li value="6"><span style="color: #24292E">console.</span><span style="color: #6F42C1">log</span><span style="color: #24292E">(</span><span style="color: #032F62">`The consensus network is ${</span><span style="color: #24292E">stdlib</span><span style="color: #032F62">.</span><span style="color: #24292E">connector</span><span style="color: #032F62">}.`</span><span style="color: #24292E">);</span></li><li value="7"></li><li value="8"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">role</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #032F62">'seller'</span><span style="color: #24292E">;</span></li><li value="9"><span style="color: #24292E">console.</span><span style="color: #6F42C1">log</span><span style="color: #24292E">(</span><span style="color: #032F62">`Your role is ${</span><span style="color: #24292E">role</span><span style="color: #032F62">}.`</span><span style="color: #24292E">);</span></li><li value="10"></li><li value="11"><span style="color: #24292E">(</span><span style="color: #D73A49">async</span><span style="color: #24292E"> () </span><span style="color: #D73A49">=&gt;</span><span style="color: #24292E"> {</span></li><li value="12"></li><li value="13"><span style="color: #24292E">  </span><span style="color: #6A737D">// SELLER</span></li><li value="14"><span style="color: #24292E">  </span><span style="color: #D73A49">if</span><span style="color: #24292E"> (role </span><span style="color: #D73A49">===</span><span style="color: #24292E"> </span><span style="color: #032F62">'seller'</span><span style="color: #24292E">) {</span></li><li value="15"><span style="color: #24292E">    </span><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">acc</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #D73A49">await</span><span style="color: #24292E"> stdlib.</span><span style="color: #6F42C1">newTestAccount</span><span style="color: #24292E">(stdlib.</span><span style="color: #6F42C1">parseCurrency</span><span style="color: #24292E">(</span><span style="color: #005CC5">1000</span><span style="color: #24292E">));</span></li><li value="16"><span style="color: #24292E">    </span><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">ctc</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> acc.</span><span style="color: #6F42C1">deploy</span><span style="color: #24292E">(backend);</span></li><li value="17"><span style="color: #24292E">    </span><span style="color: #D73A49">await</span><span style="color: #24292E"> backend.</span><span style="color: #6F42C1">Seller</span><span style="color: #24292E">(ctc, {});</span></li><li value="18"><span style="color: #24292E">  }</span></li><li value="19"></li><li value="20"><span style="color: #24292E">  </span><span style="color: #6A737D">// BUYER</span></li><li value="21"><span style="color: #24292E">  </span><span style="color: #D73A49">else</span><span style="color: #24292E"> {</span></li><li value="22"><span style="color: #24292E">  }</span></li><li value="23"></li><li value="24"><span style="color: #24292E">  </span><span style="color: #6F42C1">done</span><span style="color: #24292E">();</span></li><li value="25"><span style="color: #24292E">})();</span></li></ol></pre>
+<p>Below is a line-by-line description:</p>
 <ul>
   <li>Line 1: Import the Reach JS Standard Library loader.</li>
   <li>Line 2: Import the JS backend compiled from index.rsh.</li>
@@ -70,6 +71,7 @@
 <h2 id="indexrsh">index.rsh</h2>
 <p>Open <a href="https://github.com/hagenhaus/wisdom-for-sale/blob/master/starter/index.rsh">index.rsh</a> in vscode.</p>
 <pre class="snippet numbered"><ol class="snippet"><li value="1"><span style="color: #032F62">'reach 0.1'</span><span style="color: #24292E">;</span></li><li value="2"></li><li value="3"><span style="color: #D73A49">export</span><span style="color: #24292E"> </span><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">main</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> Reach.</span><span style="color: #6F42C1">App</span><span style="color: #24292E">(() </span><span style="color: #D73A49">=&gt;</span><span style="color: #24292E"> {</span></li><li value="4"><span style="color: #24292E">  </span><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">S</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #6F42C1">Participant</span><span style="color: #24292E">(</span><span style="color: #032F62">'Seller'</span><span style="color: #24292E">, {});</span></li><li value="5"><span style="color: #24292E">  </span><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">B</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #6F42C1">Participant</span><span style="color: #24292E">(</span><span style="color: #032F62">'Buyer'</span><span style="color: #24292E">, {});</span></li><li value="6"><span style="color: #24292E">  </span><span style="color: #6F42C1">deploy</span><span style="color: #24292E">();</span></li><li value="7"></li><li value="8"><span style="color: #24292E">  </span><span style="color: #6F42C1">exit</span><span style="color: #24292E">();</span></li><li value="9"><span style="color: #24292E">});</span></li></ol></pre>
+<p>Below is a line-by-line description:</p>
 <ul>
   <li>Line 1: Instruction to the compiler.</li>
   <li>Line 3: Reach standard application initialization.</li>
@@ -79,77 +81,86 @@
   <li>Line 8: Terminate computation.</li>
 </ul>
 <h1 id="run-the-app">Run the app</h1>
-<p>The following diagram illustrates your environment before you run your starter app. Your application consists of your frontend (index.mjs), your backend (index.rsh), and the Reach Docker environment where everything will run: the Reach compiler, your application, the consensus network devnets, and your smart contract.</p>
+<p>The following diagram illustrates your environment before you run the starter app. Your application consists of a frontend (index.mjs), a backend (index.rsh), and the Reach Docker environment where everything will run including the Reach compiler, your application, the consensus network devnets, and the smart contract.</p>
 <p>
   <img src="/en/books/essentials/tutorials/wisdom-for-sale/reach-run-1.png" class="img-fluid" width="420" loading="lazy">
 </p>
-<p>Now, run your starter app in the vscode terminal three times, once for each supported consensus network. Use the commands below in succession, and note the output:</p>
+<p>Now, run your starter app in the vscode terminal three times, once for each supported consensus network. Use the commands below in succession:</p>
 <pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ REACH_CONNECTOR_MODE=ALGO-devnet reach run</li><li value="2">$ REACH_CONNECTOR_MODE=ETH-devnet reach run</li><li value="3">$ REACH_CONNECTOR_MODE=CFX-devnet reach run</li></ol></pre>
 <p>
   <img src="/en/books/essentials/tutorials/wisdom-for-sale/vscode-run.png" class="img-fluid" width="700" loading="lazy">
 </p>
-<p>Here's what happens when you run <code>reach run</code>:</p>
-<ol>
+<p>Here is sample output:</p>
+<pre class="snippet numbered"><ol class="snippet"><li value="1">current % REACH_CONNECTOR_MODE=ALGO-devnet reach run</li><li value="2">Verifying knowledge assertions</li><li value="3">Verifying for generic connector</li><li value="4">  Verifying when ALL participants are honest</li><li value="5">  Verifying when NO participants are honest</li><li value="6">  Verifying when ONLY "Buyer" is honest</li><li value="7">  Verifying when ONLY "Seller" is honest</li><li value="8">Checked 4 theorems; No failures!</li><li value="9">[+] Building 0.2s (7/7) FINISHED</li><li value="10"> =&gt; [internal] load build definition from Dockerfile                                         0.0s</li><li value="11"> =&gt; =&gt; transferring dockerfile: 234B                                                         0.0s</li><li value="12"> =&gt; [internal] load .dockerignore                                                            0.0s</li><li value="13"> =&gt; =&gt; transferring context: 75B                                                             0.0s</li><li value="14"> =&gt; [internal] load metadata for docker.io/reachsh/runner:0.1.5                              0.0s</li><li value="15"> =&gt; [internal] load build context                                                            0.0s</li><li value="16"> =&gt; =&gt; transferring context: 4.60kB                                                          0.0s</li><li value="17"> =&gt; CACHED [1/2] FROM docker.io/reachsh/runner:0.1.5                                         0.0s</li><li value="18"> =&gt; [2/2] COPY . /app                                                                        0.0s</li><li value="19"> =&gt; exporting to image                                                                       0.0s</li><li value="20"> =&gt; =&gt; exporting layers                                                                      0.0s</li><li value="21"> =&gt; =&gt; writing image sha256:13e69eb72504bbc85074476e5d1183b6ad2734a5eabc9e56c2138023d64a507a 0.0s</li><li value="22"> =&gt; =&gt; naming to docker.io/reachsh/reach-app-current:latest                                  0.0s</li><li value="23"></li><li value="24">Use 'docker scan' to run Snyk tests against images to find vulnerabilities and learn how to fix them</li><li value="25">Creating reach2021-10-13t14-26-55z-vcv1_reach-app-current_run ... done</li><li value="26"></li><li value="27">&gt; @reach-sh/current@ index /app</li><li value="28">&gt; node --experimental-modules --unhandled-rejections=strict index.mjs</li><li value="29"></li><li value="30">The consensus network is ALGO.</li><li value="31">Your role is seller.</li></ol></pre>
+<p>Below is a line-by-line description:</p>
+<ul>
   <li>
-    <p>sss</p>
+    <p>Line 1: The Reach Compiler inputs <em>reach.rsh</em>.</p>
     <p>
       <img src="/en/books/essentials/tutorials/wisdom-for-sale/reach-run-2.png" class="img-fluid" width="420" loading="lazy">
     </p>
-  </li>
-  <li>
-    <p>sss</p>
+    <p>And, it outputs <em>index.main.mjs</em> consisting of the compiled backend (blue) and the smart contract (dark orange):</p>
     <p>
       <img src="/en/books/essentials/tutorials/wisdom-for-sale/reach-run-3.png" class="img-fluid" width="420" loading="lazy">
     </p>
   </li>
   <li>
-    <p>sss</p>
+    <p>Line 2: The Reach Verification Engine validates the smart contract:</p>
     <p>
       <img src="/en/books/essentials/tutorials/wisdom-for-sale/reach-run-4.png" class="img-fluid" width="420" loading="lazy">
     </p>
   </li>
   <li>
-    <p>sss</p>
+    <p>Lines 10-22: The process builds a Docker image for your application.</p>
     <p>
       <img src="/en/books/essentials/tutorials/wisdom-for-sale/reach-run-5.png" class="img-fluid" width="420" loading="lazy">
     </p>
+    <p>Note the mention of <em>Dockerfile</em> and <em>.dockerignore</em>. The <code>reach run</code> command creates the following set of files, deleting all but <em>index.main.mjs</em> on completion:</p>
+    <pre class="snippet unnumbered"><ol class="snippet"><li value="1">build/index.main.mjs</li><li value="2">.dockerignore</li><li value="3">.gitignore</li><li value="4">Dockerfile</li><li value="5">package.json</li></ol></pre>
+    <p>For some of your Reach projects, you may find it useful to retain and edit these files, especially <em>package.json</em>. To create and retain these files, run <code>reach scaffold</code>.</p>
   </li>
   <li>
-    <p>sss</p>
+    <p>Line 24: The process checks the new image for vulnerabilities.</p>
     <p>
       <img src="/en/books/essentials/tutorials/wisdom-for-sale/reach-run-6.png" class="img-fluid" width="420" loading="lazy">
     </p>
   </li>
   <li>
-    <p>sss</p>
+    <p>Line 27: The process runs your app in a container built from the image.</p>
     <p>
       <img src="/en/books/essentials/tutorials/wisdom-for-sale/reach-run-7.png" class="img-fluid" width="420" loading="lazy">
     </p>
   </li>
-</ol>
-<h2 id="review-build-files">Review build files</h2>
-<p>You see the following directory and files appear. Some files disappear.</p>
-<ul>
-  <li>build/index.main.mjs</li>
-  <li>.dockerignore</li>
-  <li>.gitignore</li>
-  <li>Dockerfile</li>
-  <li>package.json</li>
+  <li>
+    <p>Line 30-31: Output from your application frontend.</p>
+  </li>
 </ul>
-<p>Understand significance.</p>
-<p>Explain <code>reach scaffold</code>.</p>
 <h1 id="pass-arguments">Pass arguments</h1>
-<p>This section represents the first change that the developer makes to the project.</p>
-<p>Replace <code>const role = 'seller';</code> with the following:</p>
-<pre class="snippet numbered"><ol class="snippet"><li value="1"><span style="color: #D73A49">if</span><span style="color: #24292E"> (process.argv.</span><span style="color: #005CC5">length</span><span style="color: #24292E"> </span><span style="color: #D73A49">&lt;</span><span style="color: #24292E"> </span><span style="color: #005CC5">3</span><span style="color: #24292E"> </span><span style="color: #D73A49">||</span><span style="color: #24292E"> [</span><span style="color: #032F62">'seller'</span><span style="color: #24292E">, </span><span style="color: #032F62">'buyer'</span><span style="color: #24292E">].</span><span style="color: #6F42C1">includes</span><span style="color: #24292E">(process.argv[</span><span style="color: #005CC5">2</span><span style="color: #24292E">]) </span><span style="color: #D73A49">==</span><span style="color: #24292E"> </span><span style="color: #005CC5">false</span><span style="color: #24292E">) {</span></li><li value="2"><span style="color: #24292E">  console.</span><span style="color: #6F42C1">log</span><span style="color: #24292E">(</span><span style="color: #032F62">'Usage: reach run index [seller|buyer]'</span><span style="color: #24292E">);</span></li><li value="3"><span style="color: #24292E">  process.</span><span style="color: #6F42C1">exit</span><span style="color: #24292E">(</span><span style="color: #005CC5">0</span><span style="color: #24292E">);</span></li><li value="4"><span style="color: #24292E">}</span></li><li value="5"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">role</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> process.argv[</span><span style="color: #005CC5">2</span><span style="color: #24292E">];</span></li></ol></pre>
-<h2 id="run-in-two-terminals">Run in two terminals</h2>
-<p>Open two terminals (i.e. shells) positioned side by side.</p>
-<p>Change directory in both to <code>~/reach/wisdom-for-sale/current</code>.</p>
-<p>The left terminal is the <em>Seller Terminal</em>. In this terminal, run one of the following:</p>
-<pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ REACH_CONNECTOR_MODE=ALGO-devnet reach run index seller</li><li value="2">$ REACH_CONNECTOR_MODE=ETH-devnet reach run index seller</li><li value="3">$ REACH_CONNECTOR_MODE=CFX-devnet reach run index seller</li></ol></pre>
-<p>The right terminal is the <em>Buyer Terminal</em>. In this terminal, run the corresponding command:</p>
-<pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ REACH_CONNECTOR_MODE=ALGO-devnet reach run index buyer</li><li value="2">$ REACH_CONNECTOR_MODE=ETH-devnet reach run index buyer</li><li value="3">$ REACH_CONNECTOR_MODE=CFX-devnet reach run index buyer</li></ol></pre>
-<p>Try all of them if you like. Use these two terminal for the rest of the tutorial.</p>
+<p>In this section, you modify the starter app to accept a command-line argument specifying whether to run as the seller or buyer. Although this change does not involve Reach directly, it does emphasize that your application represents two different participants negotiating via the same contract.</p>
+<ol>
+  <li>
+    <p>In <em>index.mjs</em>, replace <code>const role = 'seller';</code> with the following:</p>
+    <pre class="snippet numbered"><ol class="snippet"><li value="1"><span style="color: #D73A49">if</span><span style="color: #24292E"> (process.argv.</span><span style="color: #005CC5">length</span><span style="color: #24292E"> </span><span style="color: #D73A49">&lt;</span><span style="color: #24292E"> </span><span style="color: #005CC5">3</span><span style="color: #24292E"> </span><span style="color: #D73A49">||</span><span style="color: #24292E"> [</span><span style="color: #032F62">'seller'</span><span style="color: #24292E">, </span><span style="color: #032F62">'buyer'</span><span style="color: #24292E">].</span><span style="color: #6F42C1">includes</span><span style="color: #24292E">(process.argv[</span><span style="color: #005CC5">2</span><span style="color: #24292E">]) </span><span style="color: #D73A49">==</span><span style="color: #24292E"> </span><span style="color: #005CC5">false</span><span style="color: #24292E">) {</span></li><li value="2"><span style="color: #24292E">  console.</span><span style="color: #6F42C1">log</span><span style="color: #24292E">(</span><span style="color: #032F62">'Usage: reach run index [seller|buyer]'</span><span style="color: #24292E">);</span></li><li value="3"><span style="color: #24292E">  process.</span><span style="color: #6F42C1">exit</span><span style="color: #24292E">(</span><span style="color: #005CC5">0</span><span style="color: #24292E">);</span></li><li value="4"><span style="color: #24292E">}</span></li><li value="5"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">role</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> process.argv[</span><span style="color: #005CC5">2</span><span style="color: #24292E">];</span></li></ol></pre>
+  </li>
+  <li>
+    <p>Open two terminals (i.e. shells), and change directory in both to <code>~/reach/wisdom-for-sale/current</code>:</p>
+    <p>
+      <img src="/en/books/essentials/tutorials/wisdom-for-sale/terminals-empty.png" class="img-fluid" width="700" loading="lazy">
+    </p>
+    <p>The left terminal is the <em>Seller Terminal</em>, and the right is the <em>Buyer Terminal</em>.</p>
+  </li>
+  <li>
+    <p>In the Seller Terminal, run one of the following:</p>
+    <pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ REACH_CONNECTOR_MODE=ALGO-devnet reach run index seller</li><li value="2">$ REACH_CONNECTOR_MODE=ETH-devnet reach run index seller</li><li value="3">$ REACH_CONNECTOR_MODE=CFX-devnet reach run index seller</li></ol></pre>
+  </li>
+  <li>
+    <p>In the <em>Buyer Terminal</em>, run the corresponding command:</p>
+    <pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ REACH_CONNECTOR_MODE=ALGO-devnet reach run index buyer</li><li value="2">$ REACH_CONNECTOR_MODE=ETH-devnet reach run index buyer</li><li value="3">$ REACH_CONNECTOR_MODE=CFX-devnet reach run index buyer</li></ol></pre>
+  </li>
+  <li>
+    <p>Repeat for the other consensus networks.</p>
+  </li>
+</ol>
 <h2 id="about-adding-node-packages">About adding Node packages</h2>
 <p>Explain that <code>reach scaffold</code> produces a <em>package.json</em> file useful for adding Node.js packages (e.g. <a href="https://www.npmjs.com/package/yargs">yargs</a>) not covered in this tutorial.</p>
 <h2 id="environment-variable-limits">Environment variable Limits</h2>
