@@ -7,7 +7,7 @@
   "hasEditBtn": true,
   "hasPageHeader": true,
   "hasPageScrollbar": true,
-  "hasRefreshBtn": true,
+  "hasRefreshBtn": false,
   "menuItem": "mi-docs",
   "pages": null,
   "pathname": "/Users/matt/repositories/reach-developer-portal/en/books/demo/reptiles/snakes",
