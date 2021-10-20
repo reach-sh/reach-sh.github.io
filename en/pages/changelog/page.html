@@ -2,9 +2,24 @@
   Below is a list of changes to Reach.
   Versions and changes-within-versions are listed in reverse-chronological order: newest things first.
 </p>
-<h2 id="015-202109---present">0.1.5: 2021/09 - present</h2>
-<p>Version 0.1.5 is the current Reach release candidate version.</p>
+<h2 id="016-202110---present">0.1.6: 2021/10 - present</h2>
+<p>Version 0.1.6 is the current Reach release candidate version.</p>
 <ul>
+  <li>2021/10/18: Added APIs via the <code>API</code> form.</li>
+  <li>2021/10/15: The backend interface to deployed contracts was updated, so old contracts will not work with this version.</li>
+  <li>2021/10/15: The backend interface to the compiled objects was updated, so you'll need to recompile for this release.</li>
+  <li>2021/10/15: Algorand devnet updated to versions 3.0.1 and 2.6.4</li>
+</ul>
+<h2 id="015-202109---202110">0.1.5: 2021/09 - 2021/10</h2>
+<p>Version 0.1.5 is the current Reach release version.</p>
+<ul>
+  <li>2021/10/11: The Solidity compiler has been upgraded to 0.8.9.</li>
+  <li>2021/10/08: The backend interface to the compiled objects was updated, so you'll need to recompile for this release.</li>
+  <li>2021/10/08: <code>parallelReduce</code> is more strict in checking that the <code>msg</code> argument is present in the parameter list of <code>case</code> components, even when it is is bound to a <code>null</code>.</li>
+  <li>2021/10/08: Added <code>getContract</code> and <code>getAddress</code>.</li>
+  <li>2021/10/08: Added <code>ctc.getContractAddress</code>.</li>
+  <li>2021/10/05: Added <code>Contract</code>. Updated <code>ctc.getInfo</code> to return a <code>Contract</code>.</li>
+  <li>2021/10/04: Added <code>unstrict</code>.</li>
   <li>
     2021/09/25: Reach clients will detect that they are attempting to publish in a race that they cannot win and switch to listening for the publication of another.
     This has the impact of frontends not being asked to sign transactions that cannot possibly succeed.
@@ -19,10 +34,11 @@
   Instead, you probably want to select one of your existing participants and assign the first publication to them.
 </p>
 <ul>
-  <li>2021/09/16: The backend interface to the compiled objects was updated, so you'll need to recompile for this release and older, deployed contracts will not work with this version.</li>
+  <li>2021/09/16: The backend interface to deployed contracts was updated, so old contracts will not work with this version.</li>
+  <li>2021/09/16: The backend interface to the compiled objects was updated, so you'll need to recompile for this release.</li>
 </ul>
 <h2 id="014-202109---202109">0.1.4: 2021/09 - 2021/09</h2>
-<p>Version 0.1.4 is the current Reach release version.</p>
+<p>Version 0.1.4 is is an old Reach release version.</p>
 <ul>
   <li>2021/09/15: <code>muldiv</code> added.</li>
   <li>2021/09/08: Add <code>--stop-after-eval</code> and <code>--verify-timeout</code> options to <code>reach compile</code>.</li>

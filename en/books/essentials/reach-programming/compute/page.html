@@ -185,6 +185,13 @@
 <pre class="snippet numbered"><ol class="snippet"><li value="1">reachc: error: Invalid field access. Expected object, got: Bool</li></ol></pre>
 <p>The correct way to write a program like this in strict mode is to use <code>Maybe</code>. Like this:</p>
 <pre class="snippet numbered"><ol class="snippet"><li value="1"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">MObj</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #6F42C1">Maybe</span><span style="color: #24292E">(</span><span style="color: #005CC5">Object</span><span style="color: #24292E">({ b : Bool }));</span></li><li value="2"></li><li value="3"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #6F42C1">foo</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> (</span><span style="color: #E36209">mo</span><span style="color: #24292E">) </span><span style="color: #D73A49">=&gt;</span></li><li value="4"><span style="color: #24292E">  mo.</span><span style="color: #6F42C1">match</span><span style="color: #24292E">({</span></li><li value="5"><span style="color: #24292E">    None: (() </span><span style="color: #D73A49">=&gt;</span><span style="color: #24292E"> </span><span style="color: #005CC5">false</span><span style="color: #24292E">),</span></li><li value="6"><span style="color: #24292E">    Some: ((</span><span style="color: #E36209">o</span><span style="color: #24292E">) </span><span style="color: #D73A49">=&gt;</span><span style="color: #24292E"> o.b)</span></li><li value="7"><span style="color: #24292E">  });</span></li><li value="8"></li><li value="9"><span style="color: #D73A49">void</span><span style="color: #24292E"> </span><span style="color: #6F42C1">foo</span><span style="color: #24292E">(MObj.</span><span style="color: #6F42C1">Some</span><span style="color: #24292E">({ b : </span><span style="color: #005CC5">true</span><span style="color: #24292E"> }));</span></li><li value="10"><span style="color: #D73A49">void</span><span style="color: #24292E"> </span><span style="color: #6F42C1">foo</span><span style="color: #24292E">(MObj.</span><span style="color: #6F42C1">None</span><span style="color: #24292E">());</span></li></ol></pre>
+<h3 id="unstrict"><code>unstrict</code></h3>
+<p>${ref((quote rsh), "unstrict")}</p>
+<pre class="snippet numbered"><ol class="snippet"><li value="1"><span style="color: #6F42C1">assert</span><span style="color: #24292E">(</span><span style="color: #6F42C1">unstrict</span><span style="color: #24292E">(() </span><span style="color: #D73A49">=&gt;</span><span style="color: #24292E"> {</span></li><li value="2"><span style="color: #24292E">  </span><span style="color: #032F62">'use strict'</span><span style="color: #24292E">;</span></li><li value="3"><span style="color: #24292E">  </span><span style="color: #6A737D">// the following fails in strict mode due to a type mismatch</span></li><li value="4"><span style="color: #24292E">  </span><span style="color: #D73A49">return</span><span style="color: #24292E"> </span><span style="color: #005CC5">1</span><span style="color: #24292E"> </span><span style="color: #D73A49">!=</span><span style="color: #24292E"> </span><span style="color: #005CC5">true</span><span style="color: #24292E">;</span></li><li value="5"><span style="color: #24292E">}));</span></li></ol></pre>
+<p>
+  <code>unstrict</code> applies a thunk, ignoring any usage of strict mode. This
+  can be useful when dealing with libraries that are written in strict mode.
+</p>
 <h3 id="identifier-reference">Identifier reference</h3>
 <pre class="snippet numbered"><ol class="snippet"><li value="1"><span style="color: #005CC5">X</span></li><li value="2"><span style="color: #005CC5">Y</span></li><li value="3"><span style="color: #005CC5">Z</span></li></ol></pre>
 <p>An identifier, written <code>ID</code>, is an expression that evaluates to the value of the bound identifier.</p>
@@ -218,6 +225,13 @@
   </li>
   <li>${ref((quote rsh), "Digest")} <code>Digest</code>, which denotes a digest.</li>
   <li>${ref((quote rsh), "Address")} <code>Address</code>, which denotes an account address.</li>
+  <li>
+    ::: note
+    Reach has different representations of contracts across connectors.
+    For example, on Algorand a <code>Contract</code> is an Application ID, but on Ethereum it is an Address.
+    :::
+    ${ref((quote rsh), "Contract")} <code>Contract</code>, which denotes the identifying information of a contract.
+  </li>
   <li>${ref((quote rsh), "Token")} <code>Token</code>, which denotes a non-network token. ${seclink("ref-networks")} discusses how <code>Token</code>s are represented on specific networks.</li>
   <li>
     ${ref((quote rsh), "Fun")} <code>Fun([Domain_0, ..., Domain_N], Range)</code>, which denotes a ${defn("function type")}, when <code>Domain_i</code> and <code>Range</code> are types.
@@ -846,6 +860,20 @@
 <p>
   The ${defn("balance")} primitive returns the balance of the contract account for the DApp.
   It takes an optional non-network token value, in which case it returns the balance of the given token.
+</p>
+<h3 id="getcontract"><code>getContract</code></h3>
+<p>${ref((quote rsh), "getContract")}</p>
+<pre class="snippet numbered"><ol class="snippet"><li value="1"><span style="color: #6F42C1">getContract</span><span style="color: #24292E">()</span></li></ol></pre>
+<p>
+  The ${defn("getContract")} primitive returns the <code>Contract</code> value for the deployed contract.
+  This function may not be called until after the first publication (which creates the contract).
+</p>
+<h3 id="getaddress"><code>getAddress</code></h3>
+<p>${ref((quote rsh), "getAddress")}</p>
+<pre class="snippet numbered"><ol class="snippet"><li value="1"><span style="color: #6F42C1">getAddress</span><span style="color: #24292E">()</span></li></ol></pre>
+<p>
+  The ${defn("getAddress")} primitive returns the <code>Address</code> value of the deployed contract's account.
+  This function may not be called until after the first publication (which creates the contract).
 </p>
 <h3 id="lastconsensustime-and-lastconsensussecs"><code>lastConsensusTime</code> and <code>lastConsensusSecs</code></h3>
 <p>${ref((quote rsh), "lastConsensusTime")}</p>

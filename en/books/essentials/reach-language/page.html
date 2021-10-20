@@ -65,6 +65,10 @@
     <code>--verify-timeout</code> <code>TIMEOUT-MS</code> --- Sets the timeout of individual verification theorems, in milliseconds.
     The default value is 2 minutes.
   </li>
+  <li>
+    The environment variable <code>REACH_DEBUG</code>, if set to any non-empty value, enables debug messages from the Reach compiler, which will appear in the console.
+    This debug information includes: the estimated cost of the contract on Algorand.
+  </li>
 </ul>
 <h3 id="reach-init"><code>reach init</code></h3>
 <p>You can create template <code>index.rsh</code> and <code>index.mjs</code> files for a simple Reach app by running</p>

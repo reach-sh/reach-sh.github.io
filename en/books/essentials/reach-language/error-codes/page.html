@@ -1336,3 +1336,14 @@
   at runtime. You can fix this code by verifying the claim via an <code>assert</code>:
 </p>
 <pre class="snippet numbered"><ol class="snippet"><li value="1"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">x</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #6F42C1">forall</span><span style="color: #24292E">(UInt);</span></li><li value="2"><span style="color: #6F42C1">assert</span><span style="color: #24292E">(x </span><span style="color: #D73A49">&gt;=</span><span style="color: #24292E"> </span><span style="color: #005CC5">0</span><span style="color: #24292E">);</span></li></ol></pre>
+<h2 id="rapi0000">RAPI0000</h2>
+<p>This error means that you defined an API but did not actually use it in your prorgam.</p>
+<h2 id="rapi0001">RAPI0001</h2>
+<p>
+  This error means that you returned the result to an API without calling it.
+  This is generally not possible unless you directly use the internal representation of APIs.
+</p>
+<h2 id="rapi0002">RAPI0002</h2>
+<p>The error means that you use an API in two places in your program, which is not allowed.</p>
+<h2 id="rapi0003">RAPI0003</h2>
+<p>This error means that you did not return a result from an API call.</p>

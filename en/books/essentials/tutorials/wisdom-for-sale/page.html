@@ -428,4 +428,80 @@
     </div>
   </li>
 </ol>
-<h1 id="create-a-webapp">Create a webapp</h1>
+<h1 id="view-the-contract">View the contract</h1>
+<p>This section shows you how to have the buyer (before attaching) peek into the deployed contract to view the price, and explains why viewing declassified contract data before attaching is sometimes necessary.</p>
+<p>Below is the <em>index.mjs</em> version of <code>confirmPurchase</code> from the <code>buyerInteract</code> object:</p>
+<pre class="snippet unnumbered"><ol class="snippet"><li value="1"><span style="color: #E36209">confirmPurchase</span><span style="color: #24292E">: </span><span style="color: #D73A49">async</span><span style="color: #24292E"> (</span><span style="color: #E36209">price</span><span style="color: #24292E">) </span><span style="color: #D73A49">=&gt;</span><span style="color: #24292E"> </span><span style="color: #D73A49">await</span><span style="color: #24292E"> </span><span style="color: #6F42C1">ask</span><span style="color: #24292E">(</span><span style="color: #032F62">`Do you want to purchase wisdom for ${</span><span style="color: #6F42C1">toSU</span><span style="color: #032F62">(</span><span style="color: #24292E">price</span><span style="color: #032F62">)</span><span style="color: #032F62">} ${</span><span style="color: #24292E">suStr</span><span style="color: #032F62">}?`</span><span style="color: #24292E">, yesno),</span></li></ol></pre>
+<p>The backend calls the function (passing <code>price</code>), and the frontend displays <code>price</code> to the buyer, asks for a decision, waits for the answer, and returns <code>true</code> or <code>false</code> to the backend. Effective for a command-line app, this approach doesn't work as well for a webapp which might use a modal in place of <code>ask-yesno</code>:</p>
+<div>
+  <img src="/en/books/essentials/tutorials/wisdom-for-sale/modal.png" class="img-fluid my-4 d-block" width="400" loading="lazy">
+</div>
+<p>Using Bootstrap as a example, here is how to display a modal:</p>
+<pre class="snippet unnumbered"><ol class="snippet"><li value="1"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">modal</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #D73A49">new</span><span style="color: #24292E"> bootstrap.</span><span style="color: #6F42C1">Modal</span><span style="color: #24292E">(document.</span><span style="color: #6F42C1">getElementById</span><span style="color: #24292E">(</span><span style="color: #032F62">'confirm-modal'</span><span style="color: #24292E">), {})</span></li><li value="2"><span style="color: #24292E">modal.</span><span style="color: #6F42C1">show</span><span style="color: #24292E">();</span></li></ol></pre>
+<p>Note that <code>modal.show()</code> does not display the modal and wait for an answer. Rather, it returns immediately to the caller (before the modal appears), and, to get the answer, the application listens (asynchronously) for <em>Yes</em> and <em>No</em> button events. So, the application cannot call <code>modal.show()</code> from within <code>confirmPurchase</code>, wait for an answer, and return <code>true</code> or <code>false</code> to the backend.</p>
+<p>Instead, a webapp can do the following prior to attaching to the contract:</p>
+<ol>
+  <li>Get and display the price to the buyer.</li>
+  <li>Get confirmation from the buyer.</li>
+</ol>
+<p>Once confirmed, the webapp can attach to the contract and complete the transaction (skipping the existing <code>confirmPurchase</code> by, for now, always returning <code>true</code>). The following directions show you how to obtain <code>price</code> from the contract before attaching:</p>
+<ol>
+  <li>
+    <p>In <em>index.rsh</em>, add Lines 4 and 10:</p>
+    <pre class="snippet numbered"><ol class="snippet"><li value="1"><span style="color: #D73A49">export</span><span style="color: #24292E"> </span><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">main</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> Reach.</span><span style="color: #6F42C1">App</span><span style="color: #24292E">(() </span><span style="color: #D73A49">=&gt;</span><span style="color: #24292E"> {</span></li><li value="2"><span style="color: #24292E">  </span><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">S</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #6F42C1">Participant</span><span style="color: #24292E">(</span><span style="color: #032F62">'Seller'</span><span style="color: #24292E">, sellerInteract);</span></li><li value="3"><span style="color: #24292E">  </span><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">B</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #6F42C1">Participant</span><span style="color: #24292E">(</span><span style="color: #032F62">'Buyer'</span><span style="color: #24292E">, buyerInteract);</span></li><li value="4"><span style="color: #24292E">  </span><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">V</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #6F42C1">View</span><span style="color: #24292E">(</span><span style="color: #032F62">'Main'</span><span style="color: #24292E">, { price: UInt });</span></li><li value="5"><span style="color: #24292E">  </span><span style="color: #6F42C1">deploy</span><span style="color: #24292E">();</span></li><li value="6"></li><li value="7"><span style="color: #24292E">  </span><span style="color: #005CC5">S</span><span style="color: #24292E">.</span><span style="color: #6F42C1">only</span><span style="color: #24292E">(() </span><span style="color: #D73A49">=&gt;</span><span style="color: #24292E"> { </span><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">price</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #6F42C1">declassify</span><span style="color: #24292E">(interact.price); });</span></li><li value="8"><span style="color: #24292E">  </span><span style="color: #005CC5">S</span><span style="color: #24292E">.</span><span style="color: #6F42C1">publish</span><span style="color: #24292E">(price);</span></li><li value="9"><span style="color: #24292E">  </span><span style="color: #005CC5">S</span><span style="color: #24292E">.interact.</span><span style="color: #6F42C1">reportReady</span><span style="color: #24292E">(price);</span></li><li value="10"><span style="color: #24292E">  </span><span style="color: #005CC5">V</span><span style="color: #24292E">.price.</span><span style="color: #6F42C1">set</span><span style="color: #24292E">(price);</span></li><li value="11"><span style="color: #24292E">  </span><span style="color: #6F42C1">commit</span><span style="color: #24292E">();</span></li></ol></pre>
+  </li>
+  <li>
+    <p>In <em>index.mjs</em>, add Lines 4 and 5 (in the Buyer section):</p>
+    <pre class="snippet numbered"><ol class="snippet"><li value="1"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">acc</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #D73A49">await</span><span style="color: #24292E"> stdlib.</span><span style="color: #6F42C1">newTestAccount</span><span style="color: #24292E">(iBalance);</span></li><li value="2"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">info</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #D73A49">await</span><span style="color: #24292E"> </span><span style="color: #6F42C1">ask</span><span style="color: #24292E">(</span><span style="color: #032F62">'Paste contract info:'</span><span style="color: #24292E">, (</span><span style="color: #E36209">s</span><span style="color: #24292E">) </span><span style="color: #D73A49">=&gt;</span><span style="color: #24292E"> </span><span style="color: #005CC5">JSON</span><span style="color: #24292E">.</span><span style="color: #005CC5">parse</span><span style="color: #24292E">(s));</span></li><li value="3"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">ctc</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> acc.</span><span style="color: #6F42C1">attach</span><span style="color: #24292E">(backend, info);</span></li><li value="4"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">price</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #D73A49">await</span><span style="color: #24292E"> ctc.</span><span style="color: #6F42C1">getViews</span><span style="color: #24292E">().Main.</span><span style="color: #6F42C1">price</span><span style="color: #24292E">();</span></li><li value="5"><span style="color: #24292E">console.</span><span style="color: #6F42C1">log</span><span style="color: #24292E">(</span><span style="color: #032F62">`The price of wisdom is ${</span><span style="color: #24292E">price</span><span style="color: #032F62">[</span><span style="color: #005CC5">0</span><span style="color: #032F62">] </span><span style="color: #D73A49">==</span><span style="color: #032F62"> </span><span style="color: #032F62">'None'</span><span style="color: #032F62"> </span><span style="color: #D73A49">?</span><span style="color: #032F62"> </span><span style="color: #032F62">'0'</span><span style="color: #032F62"> </span><span style="color: #D73A49">:</span><span style="color: #032F62"> </span><span style="color: #6F42C1">toSU</span><span style="color: #032F62">(</span><span style="color: #24292E">price</span><span style="color: #032F62">[</span><span style="color: #005CC5">1</span><span style="color: #032F62">])</span><span style="color: #032F62">} ${</span><span style="color: #24292E">suStr</span><span style="color: #032F62">}.`</span><span style="color: #24292E">);</span></li><li value="6"><span style="color: #D73A49">await</span><span style="color: #24292E"> </span><span style="color: #6F42C1">showBalance</span><span style="color: #24292E">(acc);</span></li><li value="7"><span style="color: #D73A49">await</span><span style="color: #24292E"> backend.</span><span style="color: #6F42C1">Buyer</span><span style="color: #24292E">(ctc, buyerInteract);</span></li><li value="8"><span style="color: #D73A49">await</span><span style="color: #24292E"> </span><span style="color: #6F42C1">showBalance</span><span style="color: #24292E">(acc);</span></li></ol></pre>
+  </li>
+  <li>
+    <p>Run your DApp as the seller and the buyer. Buyer output should include the following:</p>
+    <pre class="snippet numbered"><ol class="snippet"><li value="1">The price of wisdom is 5 ETH.</li></ol></pre>
+  </li>
+</ol>
+<p>Using a view, the buyer is able to obtain <code>price</code> before attaching to the contract.</p><button class="btn btn-secondary btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#apav" aria-expanded="false"><i class="fas fa-info-circle me-2"></i><span>About Participants and Views</span></button><span class="collapse" id="apav"><p>Not done yet.</p><hr style="background-color:#6c757d;opacity:1;height:5px;"></span>
+<h1 id="examine-the-webapp">Examine the webapp</h1>
+<p>The <a href="https://github.com/hagenhaus/wisdom-for-sale">wisdom-for-sale</a> repository includes a <a href="https://getbootstrap.com/docs/5.1/getting-started/introduction/">Bootstrap</a>-based webapp implementation that you can inspect and modify. You need node.js and npm installed on your computer because you will need the <a href="https://www.npmjs.com/package/http-server">http-server</a> package (or similar) to run the webapp. Below are directions for running and inspecting the DApp:</p>
+<blockquote>
+  <p>This webapp runs successfully on Ethereum at this point. If you get it running on Algorand or Conflux, please provide feedback or a pull request. Thank you! This section is the least complete at this point. I will add code explanations soon.</p>
+</blockquote>
+<ol>
+  <li>
+    <p>Copy <a href="https://github.com/hagenhaus/wisdom-for-sale/blob/master/solution/index.html">index.html</a> and <a href="https://github.com/hagenhaus/wisdom-for-sale/blob/master/solution/webapp.mjs">webapp.mjs</a> from the solution directory to your current directory.</p>
+  </li>
+  <li>
+    <p>Stop and remove all your Reach containers:</p>
+    <pre class="snippet numbered"><ol class="snippet"><li value="1">$ reach down</li></ol></pre>
+  </li>
+  <li>
+    <p>Open two terminals (i.e. shells), and change directory in both to <code>~/reach/wisdom-for-sale/current</code>:</p>
+    <p>
+      <img src="/en/books/essentials/tutorials/wisdom-for-sale/eth-devnet-webapp.png" class="img-fluid" width="700" loading="lazy">
+    </p>
+  </li>
+  <li>
+    <p>In the ETH Devnet Terminal, run the following:</p>
+    <pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ export REACH_CONNECTOR_MODE=ETH-devnet</li><li value="2">$ reach devnet</li></ol></pre>
+  </li>
+  <li>
+    <p>In the Webapp Terminal, run the following:</p>
+    <pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ npm i --global http-server # Install the package globally.</li><li value="2">$ http-server -c-1 -p 8080   # Run the webapp</li></ol></pre>
+    <p>Output should look similar to the following:</p>
+    <pre class="snippet unnumbered"><ol class="snippet"><li value="1">Starting up http-server, serving ./</li><li value="2"></li><li value="3">http-server settings: </li><li value="4">CORS: disabled</li><li value="5">Cache: -1 seconds</li><li value="6">Connection Timeout: 120 seconds</li><li value="7">Directory Listings: visible</li><li value="8">AutoIndex: visible</li><li value="9">Serve GZIP Files: false</li><li value="10">Serve Brotli Files: false</li><li value="11">Default File Extension: none</li><li value="12"></li><li value="13">Available on:</li><li value="14">  http://127.0.0.1:8080</li><li value="15">  http://192.168.1.4:8080</li><li value="16">Hit CTRL-C to stop the server</li></ol></pre>
+  </li>
+  <li>
+    <p>Browse to the url.</p>
+  </li>
+  <li>
+    <p>Click <em>Choose a DevNet</em>, and select <em>Ethereum</em>. The Deploy button should turn green.</p>
+  </li>
+  <li>
+    <p>Click <em>Deploy</em>. The <em>Attach</em> button should turn green.</p>
+  </li>
+  <li>
+    <p>Click <em>Attach</em>, and then click <em>Yes</em>. The <em>Reset</em> button should turn green.</p>
+  </li>
+  <li>
+    <p>Click <em>Reset</em>, and try it again with a different <code>Price</code> and <code>Wisdom</code> string.</p>
+  </li>
+</ol>
