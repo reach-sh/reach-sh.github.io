@@ -346,6 +346,14 @@
   If you use the reach stdlib to <code>deploy</code> or <code>attach</code> to a contract,
   the specified lower bound must be no later than the time at which the contract was deployed.
 </p>
+<hr>
+<p>${ref((quote js), "setValidQueryWindow")}</p>
+<pre class="snippet numbered"><ol class="snippet"><li value="1"><span style="color: #6F42C1">setValidQueryWindow</span><span style="color: #24292E">(width: number</span><span style="color: #D73A49">|</span><span style="color: #005CC5">true</span><span style="color: #24292E">) </span><span style="color: #D73A49">=&gt;</span><span style="color: #24292E"> </span><span style="color: #D73A49">void</span></li></ol></pre>
+<p>
+  Sets the maximum width of the query windows used to query the network for event logs.
+  The value <code>true</code> indicates that no window size should be used, and queries may span arbitrarily large window sizes.
+  While each connector has a default value that works for most common cases, tweaking this setting may be useful when dealing with layer two networks or custom endpoints that are more restrictive than normal nodes on the network.
+</p>
 <h2 id="provider-selection">Provider Selection</h2>
 <p>These functions allow you to choose which particular consensus network API provider to connect to.</p>
 <hr>
