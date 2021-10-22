@@ -3,14 +3,14 @@
   "bookPath": null,
   "bookTitle": null,
   "chapters": null,
-  "hasOtp": true,
+  "hasOtp": false,
   "hasEditBtn": true,
   "hasPageHeader": true,
   "hasPageScrollbar": true,
   "hasRefreshBtn": false,
-  "menuItem": "mi-changelog",
+  "menuItem": "mi-community",
   "pages": null,
-  "pathname": "/Users/matt/repositories/reach-developer-portal/en/pages/changelog",
+  "pathname": "/Users/matt/repositories/reach-developer-portal/en/pages/community",
   "publishedDate": null,
-  "title": "Reach's Changelog"
+  "title": "Community"
 }
