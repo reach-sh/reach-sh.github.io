@@ -3,14 +3,14 @@
   "bookPath": "en/books/essentials",
   "bookTitle": "Reach Essentials",
   "chapters": null,
-  "hasOtp": false,
+  "hasOtp": true,
   "hasEditBtn": true,
   "hasPageHeader": true,
   "hasPageScrollbar": true,
   "hasRefreshBtn": false,
   "menuItem": "mi-docs",
   "pages": null,
-  "pathname": "/Users/matt/repositories/reach-developer-portal/en/books/essentials/development-environment",
+  "pathname": "/Users/matt/repositories/reach-developer-portal/en/books/essentials/tutorials/hello-world",
   "publishedDate": null,
-  "title": "Set up your development environment"
+  "title": "Hello World"
 }

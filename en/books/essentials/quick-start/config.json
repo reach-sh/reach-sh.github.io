@@ -3,7 +3,7 @@
   "bookPath": "en/books/essentials",
   "bookTitle": "Reach Essentials",
   "chapters": null,
-  "hasOtp": true,
+  "hasOtp": false,
   "hasEditBtn": true,
   "hasPageHeader": true,
   "hasPageScrollbar": true,
