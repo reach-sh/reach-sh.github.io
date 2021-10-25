@@ -1,0 +1,16 @@
+{
+  "author": null,
+  "bookPath": null,
+  "bookTitle": null,
+  "chapters": null,
+  "hasOtp": false,
+  "hasEditBtn": true,
+  "hasPageHeader": true,
+  "hasPageScrollbar": true,
+  "hasRefreshBtn": false,
+  "menuItem": "mi-team",
+  "pages": null,
+  "pathname": "/Users/matt/repositories/reach-developer-portal/en/pages/team",
+  "publishedDate": null,
+  "title": "Team"
+}
