@@ -1,9 +1,11 @@
 {
   "author": "Sarah Smiles",
+  "background": "white",
   "bookPath": null,
   "bookTitle": null,
   "chapters": null,
   "hasOtp": true,
+  "hasCustomBase": false,
   "hasEditBtn": true,
   "hasPageHeader": true,
   "hasPageScrollbar": true,

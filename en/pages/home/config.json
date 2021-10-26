@@ -1,0 +1,18 @@
+{
+  "author": null,
+  "background": "url(/en/pages/home/stars2.jpeg), rgba(var(--bs-dark-rgb),var(--bs-bg-opacity))",
+  "bookPath": null,
+  "bookTitle": null,
+  "chapters": null,
+  "hasOtp": false,
+  "hasCustomBase": false,
+  "hasEditBtn": true,
+  "hasPageHeader": false,
+  "hasPageScrollbar": true,
+  "hasRefreshBtn": false,
+  "menuItem": "mi-home",
+  "pages": null,
+  "pathname": "/Users/matt/repositories/reach-developer-portal/en/pages/home",
+  "publishedDate": null,
+  "title": "Home"
+}

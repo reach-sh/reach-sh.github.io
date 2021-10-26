@@ -1,0 +1,18 @@
+{
+  "author": null,
+  "background": "white",
+  "bookPath": null,
+  "bookTitle": null,
+  "chapters": null,
+  "hasOtp": false,
+  "hasCustomBase": false,
+  "hasEditBtn": true,
+  "hasPageHeader": true,
+  "hasPageScrollbar": true,
+  "hasRefreshBtn": false,
+  "menuItem": null,
+  "pages": null,
+  "pathname": "/Users/matt/repositories/reach-developer-portal/en/pages/sign-in",
+  "publishedDate": null,
+  "title": "Sign in"
+}
