@@ -1,6 +1,6 @@
 <p>This tutorial shows you how to build a command-line version and a webapp version of <a href="https://github.com/hagenhaus/wisdom-for-sale">Wisdom for Sale</a>, an application that enables two participants, a seller and a buyer, to trade wisdom for tokens via a smart contract running on a private Algorand, Ethereum, or Conflux consensus network residing in a Docker container on your computer. Your DApp will create and fund two accounts, one for each participant. Then, it will enable the seller and buyer to make a deal.</p>
 <h1 id="learning-objectives">Learning Objectives</h1>
-<p>These learning objectives describe what you will be able to do as a result of completing this tutorial.</p>
+<p>The following learning objectives describe what you will be able to do as a result of completing this tutorial.</p>
 <ol>
   <li>Define essential Reach terms.</li>
   <li>Build a simple Reach command-line DApp.</li>
@@ -80,6 +80,7 @@
 <pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ REACH_CONNECTOR_MODE=ALGO-devnet reach run</li></ol></pre>
 <p>Another is to export the variable and then execute <code>reach run</code>:</p>
 <pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ export REACH_CONNECTOR_MODE=ALGO-devnet</li><li value="2">$ reach run</li></ol></pre>
+<p>Follow these steps to run the DApp:</p>
 <ol>
   <li>
     <p>In the vscode terminal, set <code>REACH_CONNECTOR_MODE=ALGO-devnet</code> and run the app on the same line:</p>
@@ -139,9 +140,9 @@
     <li>
       <p>Line 30-31: Your application outputs these messages.</p>
     </li>
-  </ul><hr style="background-color:#198754;opacity:1;height:6px;border-top:3px solid #d1e7dc;"></span>
-<h1 id="pass-a-role-argument">Pass a role argument</h1>
-<p>This section shows you how to modify the starter app to accept a command-line argument specifying whether to run as the seller or buyer. Although this change does not involve Reach directly, it does emphasize that your application represents two different participants negotiating via the same contract.</p>
+  </ul><hr style="background-color:#198754;opacity:1;height:6px;"></span>
+<h1 id="pass-an-argument">Pass an argument</h1>
+<p>This section shows you how to tell your DApp whether to run as the seller or the buyer. You do this by passing <em>role</em> as a command-line argument (e.g. <code>reach run index seller</code>). You cannot do this by passing <em>role</em> as a custom environment variable (e.g. <code>ROLE=seller reach run</code>) because the <a href="https://github.com/reach-sh/reach-lang/blob/master/reach">reach</a> script exports only a pre-determined list of environment variables (including <code>REACH_CONNECTOR_MODE</code>) within the Docker container where it runs your DApp. Follow these directions to pass <em>role</em> as a command-line argument:</p>
 <ol>
   <li>
     <p>In <em>index.mjs</em>, find the following line:</p>
@@ -152,10 +153,14 @@
     <pre class="snippet unnumbered"><ol class="snippet"><li value="1"><span style="color: #D73A49">if</span><span style="color: #24292E"> (process.argv.</span><span style="color: #005CC5">length</span><span style="color: #24292E"> </span><span style="color: #D73A49">&lt;</span><span style="color: #24292E"> </span><span style="color: #005CC5">3</span><span style="color: #24292E"> </span><span style="color: #D73A49">||</span><span style="color: #24292E"> [</span><span style="color: #032F62">'seller'</span><span style="color: #24292E">, </span><span style="color: #032F62">'buyer'</span><span style="color: #24292E">].</span><span style="color: #6F42C1">includes</span><span style="color: #24292E">(process.argv[</span><span style="color: #005CC5">2</span><span style="color: #24292E">]) </span><span style="color: #D73A49">==</span><span style="color: #24292E"> </span><span style="color: #005CC5">false</span><span style="color: #24292E">) {</span></li><li value="2"><span style="color: #24292E">  console.</span><span style="color: #6F42C1">log</span><span style="color: #24292E">(</span><span style="color: #032F62">'Usage: reach run index [seller|buyer]'</span><span style="color: #24292E">);</span></li><li value="3"><span style="color: #24292E">  process.</span><span style="color: #6F42C1">exit</span><span style="color: #24292E">(</span><span style="color: #005CC5">0</span><span style="color: #24292E">);</span></li><li value="4"><span style="color: #24292E">}</span></li><li value="5"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">role</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> process.argv[</span><span style="color: #005CC5">2</span><span style="color: #24292E">];</span></li></ol></pre>
   </li>
   <li>
-    <p>Open two terminals (i.e. shells), and change directory in both to <code>~/reach/wisdom-for-sale/current</code>:</p>
+    <p>Open two terminals (i.e. shells):</p>
     <p>
       <img src="/en/books/essentials/tutorials/wisdom-for-sale/terminals-empty.png" class="img-fluid" width="700" loading="lazy">
     </p>
+  </li>
+  <li>
+    <p>Change directory in both terminals:</p>
+    <pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ ~/reach/wisdom-for-sale/current</li></ol></pre>
   </li>
   <li>
     <p>Run the following command in both terminals:</p>
@@ -175,8 +180,63 @@
     <pre class="snippet unnumbered"><ol class="snippet"><li value="1">The consensus network is ALGO.</li><li value="2">Your role is buyer.</li></ol></pre>
   </li>
 </ol>
-<p>Later (perhaps after you finish the tutorial) you can replace this simple way of handling command-line arguments in your Reach DApp with a more sophisticated one using a Node.js package like <a href="https://www.npmjs.com/package/minimist">Minimist</a>, <a href="https://www.npmjs.com/package/commander">Commander</a>, <a href="https://www.npmjs.com/package/meow">Meow</a>, <a href="https://www.npmjs.com/package/yargs">Yargs</a>, and <a href="https://www.npmjs.com/package/vorpal">Vorpal</a>.</p><button class="btn btn-success btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#npi" aria-expanded="false"><i class="fas fa-info-circle me-2"></i><span>Node Package Integration</span></button><span class="collapse" id="npi"><p>Not done yet.</p><hr style="background-color:#198754;opacity:1;height:6px;border-top:3px solid #d1e7dc;"></span>
-<p>The <a href="https://github.com/reach-sh/reach-lang/blob/master/reach">reach</a> script exports only a pre-determined list of environment variables (e.g. <code>REACH_CONNECTOR_MODE</code>) within the Docker container where it runs your DApp, so it does not support custom environment variables (e.g. <code>ROLE=seller reach run</code>).</p>
+<h1 id="add-a-nodejs-package">Add a Node.js package</h1>
+<p>This section shows you how to leverage the <a href="https://www.npmjs.com/package/yargs">yargs</a> Node.js package to manage command-line arguments as an alternative to using the simple technique described above.</p>
+<p>This section is <strong>optional</strong>. If you do <strong>not</strong> want to add a Node.js package to your DApp at this time, you can skip to the next section, continuing to use the following commands throughout the remainder of this tutorial:</p>
+<pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ reach run index seller</li><li value="2">$ reach run index buyer</li></ol></pre>
+<p>If you <strong>do</strong> complete this section, you will need to use the following commands instead:</p>
+<pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ reach run index -r seller</li><li value="2">$ reach run index -r buyer</li></ol></pre>
+<p>Adding a Node.js package to your Reach DApp is easy:</p>
+<ol>
+  <li>
+    <p>In any terminal, change directory:</p>
+    <pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ cd ~/reach/wisdom-for-sale/current</li></ol></pre>
+  </li>
+  <li>
+    <p>Create non-temporary Reach scaffolding files:</p>
+    <pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ reach scaffold</li></ol></pre>
+  </li>
+  <li>
+    <p>Install the Node.js package:</p>
+    <pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ npm i yargs</li></ol></pre>
+  </li>
+  <li>
+    <p>Open <em>Dockerfile</em>, and uncomment</p>
+    <pre class="snippet unnumbered"><ol class="snippet"><li value="1">COPY package.json /app/package.json</li><li value="2">RUN npm install</li><li value="3">RUN npm link @reach-sh/stdlib</li></ol></pre>
+    <p><code>COPY</code> and <code>RUN</code> are commands understood by Docker.</p>
+  </li>
+  <li>
+    <p>Open <em>index.mjs</em>, and add the following import near the top of the file:</p>
+    <pre class="snippet unnumbered"><ol class="snippet"><li value="1">import yargs from 'yargs';</li></ol></pre>
+  </li>
+  <li>
+    <p>In <em>index.mjs</em>, find the following code:</p>
+    <pre class="snippet unnumbered"><ol class="snippet"><li value="1"><span style="color: #D73A49">if</span><span style="color: #24292E"> (process.argv.</span><span style="color: #005CC5">length</span><span style="color: #24292E"> </span><span style="color: #D73A49">&lt;</span><span style="color: #24292E"> </span><span style="color: #005CC5">3</span><span style="color: #24292E"> </span><span style="color: #D73A49">||</span><span style="color: #24292E"> [</span><span style="color: #032F62">'seller'</span><span style="color: #24292E">, </span><span style="color: #032F62">'buyer'</span><span style="color: #24292E">].</span><span style="color: #6F42C1">includes</span><span style="color: #24292E">(process.argv[</span><span style="color: #005CC5">2</span><span style="color: #24292E">]) </span><span style="color: #D73A49">==</span><span style="color: #24292E"> </span><span style="color: #005CC5">false</span><span style="color: #24292E">) {</span></li><li value="2"><span style="color: #24292E">  console.</span><span style="color: #6F42C1">log</span><span style="color: #24292E">(</span><span style="color: #032F62">'Usage: reach run index [seller|buyer]'</span><span style="color: #24292E">);</span></li><li value="3"><span style="color: #24292E">  process.</span><span style="color: #6F42C1">exit</span><span style="color: #24292E">(</span><span style="color: #005CC5">0</span><span style="color: #24292E">);</span></li><li value="4"><span style="color: #24292E">}</span></li><li value="5"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">role</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> process.argv[</span><span style="color: #005CC5">2</span><span style="color: #24292E">];</span></li></ol></pre>
+  </li>
+  <li>
+    <p>Replace it with the following:</p>
+    <pre class="snippet unnumbered"><ol class="snippet"><li value="1"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">argv</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #6F42C1">yargs</span><span style="color: #24292E">(process.argv.</span><span style="color: #6F42C1">slice</span><span style="color: #24292E">(</span><span style="color: #005CC5">2</span><span style="color: #24292E">))</span></li><li value="2"><span style="color: #24292E">  .</span><span style="color: #6F42C1">option</span><span style="color: #24292E">(</span><span style="color: #032F62">'help'</span><span style="color: #24292E">, {</span></li><li value="3"><span style="color: #24292E">    alias: </span><span style="color: #032F62">'h'</span><span style="color: #24292E">,</span></li><li value="4"><span style="color: #24292E">    describe: </span><span style="color: #032F62">'Show help.'</span><span style="color: #24292E">,</span></li><li value="5"><span style="color: #24292E">    type: </span><span style="color: #032F62">'boolean'</span></li><li value="6"><span style="color: #24292E">  })</span></li><li value="7"><span style="color: #24292E">  .</span><span style="color: #6F42C1">option</span><span style="color: #24292E">(</span><span style="color: #032F62">'role'</span><span style="color: #24292E">, {</span></li><li value="8"><span style="color: #24292E">    alias: </span><span style="color: #032F62">'r'</span><span style="color: #24292E">,</span></li><li value="9"><span style="color: #24292E">    describe: </span><span style="color: #032F62">'Specify role.'</span><span style="color: #24292E">,</span></li><li value="10"><span style="color: #24292E">    type: </span><span style="color: #032F62">'string'</span><span style="color: #24292E">,</span></li><li value="11"><span style="color: #24292E">    choices: [</span><span style="color: #032F62">'seller'</span><span style="color: #24292E">, </span><span style="color: #032F62">'buyer'</span><span style="color: #24292E">],</span></li><li value="12"><span style="color: #24292E">    default: </span><span style="color: #032F62">'seller'</span></li><li value="13"><span style="color: #24292E">  })</span></li><li value="14"><span style="color: #24292E">  .argv</span></li><li value="15"></li><li value="16"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">role</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> argv.r;</span></li></ol></pre>
+  </li>
+  <li>
+    <p>Tell your DApp to display help information:</p>
+    <pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ reach run index -h</li></ol></pre>
+    <p>Output should resemble the following:</p>
+    <pre class="snippet unnumbered"><ol class="snippet"><li value="1">Options:</li><li value="2">  -h, --help     Show help.          [boolean]</li><li value="3">      --version  Show version number [boolean]</li><li value="4">  -r, --role     Specify role.       [string] [choices: "seller", "buyer"] [default: "seller"]</li></ol></pre>
+  </li>
+  <li>
+    <p>In the Seller Terminal, run your DApp as the seller:</p>
+    <pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ reach run index -r seller</li></ol></pre>
+    <p>Output should resemble the following:</p>
+    <pre class="snippet unnumbered"><ol class="snippet"><li value="1">The consensus network is ALGO.</li><li value="2">Your role is seller.</li></ol></pre>
+  </li>
+  <li>
+    <p>In the Buyer Terminal, run your DApp as the buyer:</p>
+    <pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ reach run index -r buyer</li></ol></pre>
+    <p>Output should resemble the following:</p>
+    <pre class="snippet unnumbered"><ol class="snippet"><li value="1">The consensus network is ALGO.</li><li value="2">Your role is buyer.</li></ol></pre>
+  </li>
+</ol>
+<p>For the remainder of the tutorial, remember to use the <code>-r</code> flag.</p>
 <h1 id="explore-units-and-balances">Explore units and balances</h1>
 <p>This section helps you explore standard and atomic units using the <a href="/en/books/essentials/support-for-js-frontends/">JavaScript Standard Library</a>. Regarding tokens, each consensus network has a (divisible) standard unit and an (indivisible) atomic unit. Users usually want to see standard units. A smart contract, on the other hand, <em>always</em> deals with atomic units. So, your DApp needs to convert between the two frequently. <code>parseCurrency</code> converts from standard to atomic. <code>formatCurrency</code> converts from atomic to standard.</p>
 <ol>
@@ -244,7 +304,7 @@
     </tr>
   </tbody>
 </table>
-<p>In this tutorial, the seller outputs the contract information to the Seller Terminal, and the buyer copies &amp; pastes the contract information from the Seller Terminal to the Buyer Terminal (including the quotation marks if persent). In real life, the seller would need to search for a contract name and its associated contract information in some repository.</p><button class="btn btn-success btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#fsci" aria-expanded="false"><i class="fas fa-info-circle me-2"></i><span>Storing and Finding Contract Information</span></button><span class="collapse" id="fsci"><p>Not done yet.</p><hr style="background-color:#198754;opacity:1;height:6px;border-top:3px solid #d1e7dc;"></span>
+<p>In this tutorial, the seller outputs the contract information to the Seller Terminal, and the buyer copies &amp; pastes the contract information from the Seller Terminal to the Buyer Terminal (including the quotation marks if persent). In real life, the seller would need to search for a contract name and its associated contract information in some repository.</p><button class="btn btn-success btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#fsci" aria-expanded="false"><i class="fas fa-info-circle me-2"></i><span>Storing and Finding Contract Information</span></button><span class="collapse" id="fsci"><p>Not done yet.</p><hr style="background-color:#198754;opacity:1;height:6px;"></span>
 <p>Follow these directions to have the seller deploy the contract and return the contract information:</p>
 <ol>
   <li>
@@ -289,7 +349,7 @@
     <p>The seller creates the contract, retrieves the contract information, and makes it available to the buyer who will (shortly) use the information to attach to the contract. Note that simply deploying the contract cost the seller gas.</p>
   </li>
 </ol>
-<p>The interact objects introduced in this section facilitate communication between the frontend (e.g. <code>index.mjs</code>) and backend (e.g. <code>index.main.mjs</code>) of Reach applications, (remembering that <code>index.rsh</code> is the pre-compiled version of <code>index.main.mjs</code>).</p><button class="btn btn-success btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#aio" aria-expanded="false"><i class="fas fa-info-circle me-2"></i><span>About Interact Objects</span></button><span class="collapse" id="aio"><p>Not done yet.</p><hr style="background-color:#198754;opacity:1;height:6px;border-top:3px solid #d1e7dc;"></span>
+<p>The interact objects introduced in this section facilitate communication between the frontend (e.g. <code>index.mjs</code>) and backend (e.g. <code>index.main.mjs</code>) of Reach applications, (remembering that <code>index.rsh</code> is the pre-compiled version of <code>index.main.mjs</code>).</p><button class="btn btn-success btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#aio" aria-expanded="false"><i class="fas fa-info-circle me-2"></i><span>About Interact Objects</span></button><span class="collapse" id="aio"><p>Not done yet.</p><hr style="background-color:#198754;opacity:1;height:6px;"></span>
 <h1 id="attach-to-the-contract-buyer">Attach to the contract (buyer)</h1>
 <p>This section shows you how to have the buyer attach to the contact. It also introduces <em>@reach-sh/stdlib/ask.mjs</em>, a minimal Reach Node.js package for command-line input.</p>
 <ol>
@@ -348,7 +408,7 @@
     </div>
   </li>
 </ol>
-<p>Reach programs are state machines. States include <em>step</em>, <em>local step</em>, and <em>consensus step</em>. State transitions include <em>deploy</em>, <em>publish</em>, <em>commit</em>, etc. Click the button to learn more.</p><button class="btn btn-success btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#atrl" aria-expanded="false"><i class="fas fa-info-circle me-2"></i><span>About the Reach Programming Language</span></button><span class="collapse" id="atrl"><p>Not done yet.</p><hr style="background-color:#198754;opacity:1;height:6px;border-top:3px solid #d1e7dc;"></span>
+<p>Reach programs are state machines. States include <em>step</em>, <em>local step</em>, and <em>consensus step</em>. State transitions include <em>deploy</em>, <em>publish</em>, <em>commit</em>, etc. Click the button to learn more.</p><button class="btn btn-success btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#atrl" aria-expanded="false"><i class="fas fa-info-circle me-2"></i><span>About the Reach Programming Language</span></button><span class="collapse" id="atrl"><p>Not done yet.</p><hr style="background-color:#198754;opacity:1;height:6px;"></span>
 <h1 id="cancel-a-transaction">Cancel a transaction</h1>
 <p>This section shows you how to cancel a transaction.</p>
 <ol>
@@ -508,7 +568,7 @@
     <pre class="snippet unnumbered"><ol class="snippet"><li value="1">The price of wisdom is 5 ETH.</li></ol></pre>
   </li>
 </ol>
-<p>Using a view, the buyer is able to obtain <code>price</code> before attaching to the contract.</p><button class="btn btn-success btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#apav" aria-expanded="false"><i class="fas fa-info-circle me-2"></i><span>About Participants and Views</span></button><span class="collapse" id="apav"><p>Not done yet.</p><hr style="background-color:#198754;opacity:1;height:6px;border-top:3px solid #d1e7dc;"></span>
+<p>Using a view, the buyer is able to obtain <code>price</code> before attaching to the contract.</p><button class="btn btn-success btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#apav" aria-expanded="false"><i class="fas fa-info-circle me-2"></i><span>About Participants and Views</span></button><span class="collapse" id="apav"><p>Not done yet.</p><hr style="background-color:#198754;opacity:1;height:6px;"></span>
 <h1 id="examine-the-webapp">Examine the webapp</h1>
 <p>The <a href="https://github.com/hagenhaus/wisdom-for-sale">wisdom-for-sale</a> repository includes a <a href="https://getbootstrap.com/docs/5.1/getting-started/introduction/">Bootstrap</a>-based webapp implementation that you can inspect and modify:</p>
 <p class="ratio ratio-16x9 my-4" style="max-width:500px;">
