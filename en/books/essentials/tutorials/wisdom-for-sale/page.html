@@ -341,7 +341,7 @@
       <li>Line 6: <code>commit()</code> transitions to a step.</li>
       <li>Line 8: <code>exit()</code> halts the contract forever.</li>
     </ul>
-    <p>The next section includes an information button about the Reach programming language.</p>
+    <p>The next section explains these functions in more detail. For now, know that Reach programs (the <em>index.rsh</em> portion of your Reach DApp) are organized into four modes, and that <code>deploy</code>, <code>only</code>, <code>publish</code>, <code>commit</code>, and <code>exit</code> cause mode transitions.</p>
   </li>
   <li>
     <p>Run your DApp as the seller. Output should resemble the following:</p>
@@ -349,7 +349,7 @@
     <p>The seller creates the contract, retrieves the contract information, and makes it available to the buyer who will (shortly) use the information to attach to the contract. Note that simply deploying the contract cost the seller gas.</p>
   </li>
 </ol>
-<p>The interact objects introduced in this section facilitate communication between the frontend (e.g. <code>index.mjs</code>) and backend (e.g. <code>index.main.mjs</code>) of Reach applications, (remembering that <code>index.rsh</code> is the pre-compiled version of <code>index.main.mjs</code>).</p><button class="btn btn-success btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#aio" aria-expanded="false"><i class="fas fa-info-circle me-2"></i><span>About Interact Objects</span></button><span class="collapse" id="aio"><p>Not done yet.</p><hr style="background-color:#198754;opacity:1;height:6px;"></span>
+<p>The interact objects introduced in this section facilitate communication between the frontend (e.g. <code>index.mjs</code>) and backend (e.g. <code>index.main.mjs</code>) of Reach applications, (remembering that <code>index.rsh</code> is the pre-compiled version of <code>index.main.mjs</code>). The <a href="/en/books/essentials/tutorials/market-day/">Market Day</a> tutorial explores interact objects in more detail.</p>
 <h1 id="attach-to-the-contract-buyer">Attach to the contract (buyer)</h1>
 <p>This section shows you how to have the buyer attach to the contact. It also introduces <em>@reach-sh/stdlib/ask.mjs</em>, a minimal Reach Node.js package for command-line input.</p>
 <ol>
@@ -394,7 +394,7 @@
       <li>Line 2: <code>B.publish()</code> transitions to a consensus step.</li>
       <li>Line 4: <code>commit()</code> transitions to a step.</li>
     </ul>
-    <p>The bottom of this section includes an information button about the Reach programming language.</p>
+    <p>See <a href="#reach-mode-diagram">Reach Mode Diagram</a> and <a href="#reach-mode-definitions">Reach Mode Definitions</a> at the bottom of this section for an explanation about <em>index.rsh</em> code.</p>
   </li>
   <li>
     <p>Run your DApp as both the seller and the buyer. When prompted, copy &amp; paste the contract info from the Seller Terminal to the Buyer Terminal. Output should resemble the following:</p>
@@ -408,7 +408,27 @@
     </div>
   </li>
 </ol>
-<p>Reach programs are state machines. States include <em>step</em>, <em>local step</em>, and <em>consensus step</em>. State transitions include <em>deploy</em>, <em>publish</em>, <em>commit</em>, etc. Click the button to learn more.</p><button class="btn btn-success btn-sm" type="button" data-bs-toggle="collapse" data-bs-target="#atrl" aria-expanded="false"><i class="fas fa-info-circle me-2"></i><span>About the Reach Programming Language</span></button><span class="collapse" id="atrl"><p>Not done yet.</p><hr style="background-color:#198754;opacity:1;height:6px;"></span>
+<h2 id="reach-mode-diagram">Reach Mode Diagram</h2>
+<p>Reach programs (the <em>index.rsh</em> portion of your Reach DApp) are organized into four modes: <em>Init Mode</em>, <em>Step Mode</em>, <em>Local Step Mode</em>, and <em>Consensus Step Mode</em>. Consider this diagram:</p>
+<div>
+  <img src="/en/books/essentials/tutorials/wisdom-for-sale/modes.png" class="img-fluid my-4 d-block" width="700" loading="lazy">
+</div>
+<p>The dark blue boxes in the diagram represent modes. The light blue boxes represent actions (functions) permitted within the mode. The orange text represents functions that cause transitions between modes.</p>
+<h2 id="reach-mode-definitions">Reach Mode Definitions</h2>
+<h3 id="init-mode">Init Mode</h3>
+<p>Application Initialization defines participants and views (see <a href="#view-the-contract">View the contract</a> later in the tutorial). It also, optionally, overrides default compile options. Lines 2 and 3 below occur in the <em>Init</em> mode:</p>
+<pre class="snippet numbered"><ol class="snippet"><li value="1"><span style="color: #D73A49">export</span><span style="color: #24292E"> </span><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">main</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> Reach.</span><span style="color: #6F42C1">App</span><span style="color: #24292E">(() </span><span style="color: #D73A49">=&gt;</span><span style="color: #24292E"> {</span></li><li value="2"><span style="color: #24292E">  </span><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">S</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #6F42C1">Participant</span><span style="color: #24292E">(</span><span style="color: #032F62">'Seller'</span><span style="color: #24292E">, sellerInteract);</span></li><li value="3"><span style="color: #24292E">  </span><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">B</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #6F42C1">Participant</span><span style="color: #24292E">(</span><span style="color: #032F62">'Buyer'</span><span style="color: #24292E">, buyerInteract);</span></li><li value="4"><span style="color: #24292E">  </span><span style="color: #6F42C1">deploy</span><span style="color: #24292E">();</span></li></ol></pre>
+<p>You can also override compile options (Line 2 below) in the <em>Init</em> mode:</p>
+<pre class="snippet numbered"><ol class="snippet"><li value="1"><span style="color: #D73A49">export</span><span style="color: #24292E"> </span><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">main</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> Reach.</span><span style="color: #6F42C1">App</span><span style="color: #24292E">(() </span><span style="color: #D73A49">=&gt;</span><span style="color: #24292E"> {</span></li><li value="2"><span style="color: #24292E">  </span><span style="color: #6F42C1">setOptions</span><span style="color: #24292E">({ verifyArithmetic: </span><span style="color: #005CC5">true</span><span style="color: #24292E">, connectors: [</span><span style="color: #005CC5">ETH</span><span style="color: #24292E">, </span><span style="color: #005CC5">ALGO</span><span style="color: #24292E"> ] });</span></li><li value="3"><span style="color: #24292E">  </span><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">S</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #6F42C1">Participant</span><span style="color: #24292E">(</span><span style="color: #032F62">'Seller'</span><span style="color: #24292E">, sellerInteract);</span></li><li value="4"><span style="color: #24292E">  </span><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">B</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #6F42C1">Participant</span><span style="color: #24292E">(</span><span style="color: #032F62">'Buyer'</span><span style="color: #24292E">, buyerInteract);</span></li><li value="5"><span style="color: #24292E">  </span><span style="color: #6F42C1">deploy</span><span style="color: #24292E">();</span></li></ol></pre>
+<p>The <code>deploy</code> function transitions from the <em>Init</em> mode to the <em>Step</em> mode.</p>
+<h3 id="step-mode">Step Mode</h3>
+<p>A Step specifies actions taken by each and every participant. <code>exit()</code>, for example, is a function that must occur within a step, and it means that each and every participant exits the contract after which that instance of the contract becomes forever unavailable.</p>
+<h3 id="local-step-mode">Local Step Mode</h3>
+<p>A Local Step specifies actions taken by a single participant. Local steps must occur within the body of <code>only</code> or <code>each</code> statements. Here is an example:</p>
+<pre class="snippet unnumbered"><ol class="snippet"><li value="1"><span style="color: #005CC5">S</span><span style="color: #24292E">.</span><span style="color: #6F42C1">only</span><span style="color: #24292E">(() </span><span style="color: #D73A49">=&gt;</span><span style="color: #24292E"> { </span><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">price</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #6F42C1">declassify</span><span style="color: #24292E">(interact.price); });</span></li></ol></pre>
+<p><code>only()</code> and <code>each()</code> transition to a local step and then back to the originating mode (step or consensus step).</p>
+<h3 id="consensus-step-mode">Consensus Step Mode</h3>
+<p>A Consensus Step specifies actions taken by the contract itself. Later in this tutorial, the contract calls <code>transfer</code> to transfer funds from the contract to the seller.</p>
 <h1 id="cancel-a-transaction">Cancel a transaction</h1>
 <p>This section shows you how to cancel a transaction.</p>
 <ol>

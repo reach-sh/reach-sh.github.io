@@ -9,7 +9,7 @@
   "hasEditBtn": true,
   "hasPageHeader": false,
   "hasPageScrollbar": true,
-  "hasRefreshBtn": false,
+  "hasRefreshBtn": true,
   "menuItem": null,
   "pages": null,
   "pathname": "/Users/matt/repositories/reach-developer-portal/en/pages/search",

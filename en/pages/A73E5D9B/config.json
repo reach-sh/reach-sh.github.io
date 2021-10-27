@@ -1,8 +1,8 @@
 {
   "author": null,
   "background": "white",
-  "bookPath": "en/books/demo",
-  "bookTitle": "Demo Book",
+  "bookPath": null,
+  "bookTitle": null,
   "chapters": null,
   "hasOtp": true,
   "hasCustomBase": false,
@@ -10,9 +10,9 @@
   "hasPageHeader": true,
   "hasPageScrollbar": true,
   "hasRefreshBtn": true,
-  "menuItem": "mi-docs",
+  "menuItem": null,
   "pages": null,
-  "pathname": "/Users/matt/repositories/reach-developer-portal/en/books/demo/birds/blackbirds",
+  "pathname": "/Users/matt/repositories/reach-developer-portal/en/pages/A73E5D9B",
   "publishedDate": null,
-  "title": "Blackbirds"
+  "title": "Candidate Discussion Outline"
 }
