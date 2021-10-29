@@ -1,6 +1,6 @@
 {
   "author": null,
-  "background": "url(/en/pages/home/stars2.jpeg), rgba(var(--bs-dark-rgb),var(--bs-bg-opacity))",
+  "background": "white",
   "bookPath": null,
   "bookTitle": null,
   "chapters": null,
