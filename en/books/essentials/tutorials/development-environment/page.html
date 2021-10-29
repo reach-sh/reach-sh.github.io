@@ -40,7 +40,7 @@
     <pre class="snippet numbered"><ol class="snippet"><li value="1">...</li><li value="2">Hello, Alice and Bob!</li><li value="3">Launching...</li><li value="4">Starting backends...</li><li value="5">Goodbye, Alice and Bob!</li></ol></pre>
   </li>
 </ol>
-<h1 id="maintain-your-environment">Maintain your environment</h1>
+<h1 id="maintain-reach-environment">Maintain Reach environment</h1>
 <p>From time to time, you will need to do the following:</p>
 <ul>
   <li>
@@ -56,3 +56,12 @@
     <pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ reach update</li></ol></pre>
   </li>
 </ul>
+<h1 id="maintain-docker-environment">Maintain Docker Environment</h1>
+<h2 id="reach-devnet-is-ambiguous">reach-devnet is ambiguous</h2>
+<p>The following command may emit this error:</p>
+<pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ reach devnet</li><li value="2">ERROR: 2 matches found based on name: network reach-devnet is ambiguous</li></ol></pre>
+<p>This error indicates that your Docker environment has two networks with the same name:</p>
+<pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ docker network ls</li><li value="2">NETWORK ID     NAME                            DRIVER    SCOPE</li><li value="3">99aa458bc910   reach-devnet                    bridge    local</li><li value="4">0515874f7eea   reach-devnet                    bridge    local</li></ol></pre>
+<p>Fix this issue by removing one or both networks:</p>
+<pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ docker network rm 99aa458bc910</li></ol></pre>
+<p>Then, run <code>reach devnet</code> again.</p>
