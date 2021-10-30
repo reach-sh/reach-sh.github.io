@@ -4,7 +4,7 @@
   "bookPath": "en/books/essentials",
   "bookTitle": "Reach Essentials",
   "chapters": null,
-  "hasOtp": true,
+  "hasOtp": false,
   "hasCustomBase": false,
   "hasEditBtn": true,
   "hasPageHeader": true,
@@ -12,7 +12,7 @@
   "hasRefreshBtn": true,
   "menuItem": "mi-docs",
   "pages": null,
-  "pathname": "/Users/matt/repositories/reach-developer-portal/en/books/essentials",
+  "pathname": "/Users/matt/repositories/reach-developer-portal/en/books/essentials/getting-started",
   "publishedDate": null,
-  "title": "Reach Essentials"
+  "title": "Getting Started"
 }
