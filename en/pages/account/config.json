@@ -6,13 +6,13 @@
   "chapters": null,
   "hasOtp": false,
   "hasCustomBase": false,
-  "hasEditBtn": true,
+  "hasEditBtn": false,
   "hasPageHeader": true,
   "hasPageScrollbar": true,
-  "hasRefreshBtn": true,
+  "hasRefreshBtn": false,
   "menuItem": null,
   "pages": null,
-  "pathname": "/Users/matt/repositories/reach-developer-portal/en/pages/sign-in",
+  "pathname": "/Users/matt/repositories/reach-developer-portal/en/pages/account",
   "publishedDate": null,
-  "title": "Sign in"
+  "title": "Account"
 }
