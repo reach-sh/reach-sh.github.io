@@ -555,7 +555,7 @@
   </li>
 </ol>
 <h1 id="view-the-contract">View the contract</h1>
-<p>This section shows you how to have the buyer (before attaching) peek into the deployed contract to view the price, and explains why viewing declassified contract data before attaching is sometimes necessary.</p>
+<p>This section shows you how to have the buyer (before attaching) peek into the deployed contract to view the price, and explains why viewing contract data before attaching is sometimes advantageous.</p>
 <p>Below is the <em>index.mjs</em> version of <code>confirmPurchase</code> from the <code>buyerInteract</code> object:</p>
 <pre class="snippet unnumbered"><ol class="snippet"><li value="1"><span style="color: #E36209">confirmPurchase</span><span style="color: #24292E">: </span><span style="color: #D73A49">async</span><span style="color: #24292E"> (</span><span style="color: #E36209">price</span><span style="color: #24292E">) </span><span style="color: #D73A49">=&gt;</span><span style="color: #24292E"> </span><span style="color: #D73A49">await</span><span style="color: #24292E"> </span><span style="color: #6F42C1">ask</span><span style="color: #24292E">(</span><span style="color: #032F62">`Do you want to purchase wisdom for ${</span><span style="color: #6F42C1">toSU</span><span style="color: #032F62">(</span><span style="color: #24292E">price</span><span style="color: #032F62">)</span><span style="color: #032F62">} ${</span><span style="color: #24292E">suStr</span><span style="color: #032F62">}?`</span><span style="color: #24292E">, yesno),</span></li></ol></pre>
 <p>The backend calls the function (passing <code>price</code>), and the frontend displays <code>price</code> to the buyer, asks for a decision, waits for the answer, and returns <code>true</code> or <code>false</code> to the backend. Effective for a command-line app, this approach doesn't work as well for a webapp which might use a modal in place of <code>ask-yesno</code>:</p>
@@ -647,7 +647,7 @@
     <p>Click <em>Choose a DevNet</em>, select <em>Ethereum</em>, and repeat the Deploy, Attach, Reset steps.</p>
   </li>
 </ol>
-<p>Note that the webapp doesn't run reliably on Conflux yet. I'm working on it.</p>
+<p>Note that the webapp doesn't run reliably on Conflux yet.</p>
 <h1 id="self-assessment">Self Assessment</h1>
 <p>Click on the question to view the answer.</p>
 <ol>

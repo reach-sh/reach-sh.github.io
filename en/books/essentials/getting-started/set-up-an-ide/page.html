@@ -60,8 +60,9 @@
 <h2 id="reach-devnet-is-ambiguous">reach-devnet is ambiguous</h2>
 <p>The following command may emit this error:</p>
 <pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ reach devnet</li><li value="2">ERROR: 2 matches found based on name: network reach-devnet is ambiguous</li></ol></pre>
-<p>This error indicates that your Docker environment has two networks with the same name:</p>
-<pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ docker network ls</li><li value="2">NETWORK ID     NAME                            DRIVER    SCOPE</li><li value="3">99aa458bc910   reach-devnet                    bridge    local</li><li value="4">0515874f7eea   reach-devnet                    bridge    local</li></ol></pre>
-<p>Fix this issue by removing one or both networks:</p>
+<p>This error indicates that your Docker environment has two networks with the same name (i.e. <em>reach-devnet</em>):</p>
+<pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ docker network ls</li><li value="2">NETWORK ID     NAME            DRIVER    SCOPE</li><li value="3">6a1eb744c3da   bridge          bridge    local</li><li value="4">731ef93dc5ee   host            host      local</li><li value="5">fcf2f7562b08   none            null      local</li><li value="6">99aa458bc910   reach-devnet    bridge    local</li><li value="7">0515874f7eea   reach-devnet    bridge    local</li></ol></pre>
+<p>Note that <em>bridge</em>, <em>host</em>, and <em>none</em> are pre-defined networks that cannot be removed.</p>
+<p>Fix this issue by removing one or both duplicate networks:</p>
 <pre class="snippet unnumbered"><ol class="snippet"><li value="1">$ docker network rm 99aa458bc910</li></ol></pre>
 <p>Then, run <code>reach devnet</code> again.</p>
