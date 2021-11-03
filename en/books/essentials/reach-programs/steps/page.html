@@ -151,6 +151,10 @@
   <li><code>API_CONSENSUS_EXPR</code> is a function parameterized over the input to the API member function and a function that returns a value to the API call; this function must be called;</li>
   <li>the <code>timeout</code> and <code>throwTimeout</code> parameter are as in an consensus transfer.</li>
 </ul>
+<p>
+  If the discussion of <code>.api</code> component, the phrase "parameterized over the input" means that if an API function has two arguments, such as <code>Fun([UInt, UInt], Null)</code>, then the corresponding expression must receive two arguments.
+  For example, the <code>API_PAY_EXPR</code> component would be a function that accepts two arguments, while the <code>API_CONSENSUS_EXPR</code> would be a function that acccepts three arguments---the two for the API and the function used to return a value.
+</p>
 <p>If the <code>msg</code> field is absent from the object returned from <code>PUBLISH_EXPR</code>, then it is treated as if it were <code>null</code>.</p>
 <p>If the <code>when</code> field is absent from the object returned from <code>PUBLISH_EXPR</code>, then it is treated as if it were <code>true</code>.</p>
 <p>If the <code>PAY_EXPR</code> is absent, then it is treated as if it were <code>(_) =&gt; 0</code>.</p>
@@ -225,4 +229,24 @@
   Has participant <code>Who</code> make a publication, then transfer the <code>balance()</code> and the non-network pay amount to <code>Who</code> and end the DApp after executing the function <code>after</code> in a step.
   The <code>nonNetPayAmt</code> parameter should be a pay amount. For example, when closing a program that uses a <code>Token</code> <code>token</code>, the argument would be <code>[ [balance(tok), tok] ]</code>.
   The <code>after</code> and <code>nonNetPayAmt</code> arguments are optional.
+</p>
+<h3 id="call"><code>call</code></h3>
+<p>${ref((quote rsh), "call")}</p>
+<pre class="snippet numbered"><ol class="snippet"><li value="1"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">A</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #6F42C1">API</span><span style="color: #24292E">(</span><span style="color: #032F62">'A'</span><span style="color: #24292E">, {</span></li><li value="2"><span style="color: #24292E">  isGt: </span><span style="color: #6F42C1">Fun</span><span style="color: #24292E">([UInt, UInt], Bool);</span></li><li value="3"><span style="color: #24292E">});</span></li><li value="4"><span style="color: #6A737D">// ...</span></li><li value="5"><span style="color: #D73A49">const</span><span style="color: #24292E"> [ </span><span style="color: #005CC5">dom</span><span style="color: #24292E">, </span><span style="color: #005CC5">k</span><span style="color: #24292E"> ] </span><span style="color: #D73A49">=</span></li><li value="6"><span style="color: #24292E">  </span><span style="color: #6F42C1">call</span><span style="color: #24292E">(</span><span style="color: #005CC5">A</span><span style="color: #24292E">.isGt).</span><span style="color: #6F42C1">assume</span><span style="color: #24292E">((</span><span style="color: #E36209">x</span><span style="color: #24292E">, </span><span style="color: #E36209">y</span><span style="color: #24292E">) </span><span style="color: #D73A49">=&gt;</span><span style="color: #24292E"> x </span><span style="color: #D73A49">!=</span><span style="color: #24292E"> y)</span></li><li value="7"><span style="color: #24292E">              .</span><span style="color: #6F42C1">pay</span><span style="color: #24292E">((</span><span style="color: #E36209">x</span><span style="color: #24292E">, </span><span style="color: #E36209">y</span><span style="color: #24292E">) </span><span style="color: #D73A49">=&gt;</span><span style="color: #24292E"> x);</span></li><li value="8"><span style="color: #D73A49">const</span><span style="color: #24292E"> [</span><span style="color: #005CC5">x</span><span style="color: #24292E">, </span><span style="color: #005CC5">y</span><span style="color: #24292E">] </span><span style="color: #D73A49">=</span><span style="color: #24292E"> dom;</span></li><li value="9"><span style="color: #6F42C1">k</span><span style="color: #24292E">(x </span><span style="color: #D73A49">&gt;</span><span style="color: #24292E"> y);</span></li><li value="10"><span style="color: #6F42C1">commit</span><span style="color: #24292E">();</span></li></ol></pre>
+<p>A ${defn("call")} is written:</p>
+<pre class="snippet numbered"><ol class="snippet"><li value="1"><span style="color: #D73A49">const</span><span style="color: #24292E"> [ </span><span style="color: #005CC5">DOMAIN</span><span style="color: #24292E">, </span><span style="color: #005CC5">RET_FUN</span><span style="color: #24292E"> ] </span><span style="color: #D73A49">=</span></li><li value="2"><span style="color: #24292E">  </span><span style="color: #6F42C1">call</span><span style="color: #24292E">(</span><span style="color: #005CC5">API_EXPR</span><span style="color: #24292E">)</span></li><li value="3"><span style="color: #24292E">    .</span><span style="color: #6F42C1">pay</span><span style="color: #24292E">(</span><span style="color: #005CC5">API_PAY_EXPR</span><span style="color: #24292E">)</span></li><li value="4"><span style="color: #24292E">    .</span><span style="color: #6F42C1">assume</span><span style="color: #24292E">(</span><span style="color: #005CC5">API_ASSUME_EXPR</span><span style="color: #24292E">)</span></li><li value="5"><span style="color: #24292E">    .</span><span style="color: #6F42C1">throwTimeout</span><span style="color: #24292E">(</span><span style="color: #005CC5">DELAY_EXPR</span><span style="color: #24292E">, </span><span style="color: #005CC5">THROW_EXPR</span><span style="color: #24292E">)</span></li></ol></pre>
+<p>where:</p>
+<ul>
+  <li><code>DOMAIN</code> is the the domain of the API member function.</li>
+  <li><code>RET_FUN</code> is a function that returns a value to the API call. This function must be called.</li>
+  <li><code>API_EXPR</code> is an expression that evaluates to an API member function.</li>
+  <li>
+    <code>API_PAY_EXPR</code>, <code>API_ASSUME_EXPR</code>, and <code>throwTimeout</code> are like the corresponding parts in a <code>fork</code> statement.
+    They are optional.
+  </li>
+</ul>
+<p>
+  <code>call</code> will call the given API member function, returning a pair, <code>[DOMAIN, RET_FUN]</code>.
+  <code>call</code> will publish the domain of the API member function, transferring the program from
+  a step to consensus step.
 </p>

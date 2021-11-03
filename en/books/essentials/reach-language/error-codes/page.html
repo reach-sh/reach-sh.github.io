@@ -1184,6 +1184,31 @@
   Additionally, you can create a new <code>Participant</code> to specifically perform this action.
 </p>
 <pre class="snippet numbered"><ol class="snippet"><li value="1"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">Constructor</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #6F42C1">Participant</span><span style="color: #24292E">(</span><span style="color: #032F62">'Constructor'</span><span style="color: #24292E">, {});</span></li><li value="2"><span style="color: #6A737D">// ...</span></li><li value="3"><span style="color: #6F42C1">deploy</span><span style="color: #24292E">();</span></li><li value="4"><span style="color: #24292E">Constructor.</span><span style="color: #6F42C1">publish</span><span style="color: #24292E">();</span></li><li value="5"><span style="color: #6F42C1">commit</span><span style="color: #24292E">();</span></li><li value="6"><span style="color: #6A737D">// ...</span></li></ol></pre>
+<h2 id="re0121">RE0121</h2>
+<p>
+  This error indicates that one of an API's interface members is not a function.
+  For example:
+</p>
+<pre class="snippet numbered"><ol class="snippet"><li value="1"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">A</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #6F42C1">API</span><span style="color: #24292E">(</span><span style="color: #032F62">'api'</span><span style="color: #24292E">, {</span></li><li value="2"><span style="color: #24292E">  tastiness: UInt,</span></li><li value="3"><span style="color: #24292E">});</span></li></ol></pre>
+<h2 id="re0122">RE0122</h2>
+<p>
+  This error indicates that the left-hand side of a ```js
+  call
+</p>
+<pre class="snippet numbered"><ol class="snippet"><li value="1"> assignment is not a pair of the domain and a function to return a result to the function.</li><li value="2">For example:</li><li value="3"></li><li value="4">```js</li><li value="5">const x = call(Voter.vote);</li></ol></pre>
+<h2 id="re0123">RE0123</h2>
+<p>
+  This error indicates that the name provided to a <code>Participant</code>, <code>ParticipantClass</code>, <code>API</code>, or <code>View</code> is already in use.
+  There is a single namespace for all of these entities.
+</p>
+<p>For example, the code below erroneously uses the same name multiple times:</p>
+<pre class="snippet numbered"><ol class="snippet"><li value="1"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">A</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #6F42C1">Participant</span><span style="color: #24292E">(</span><span style="color: #032F62">'Flower_girl'</span><span style="color: #24292E">, {});</span></li><li value="2"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">B</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #6F42C1">API</span><span style="color: #24292E">(</span><span style="color: #032F62">'Flower'</span><span style="color: #24292E">, { girl: </span><span style="color: #6F42C1">Fun</span><span style="color: #24292E">([UInt], Null) });</span></li></ol></pre>
+<p>
+  <code>'Flower_girl'</code> is used multiple times because every method of an <code>API</code> will
+  introduce a binding, of the format: <code>&lt;API name&gt;_&lt;method name&gt;</code>, into the namespace.
+</p>
+<p>You can fix this error by using different names:</p>
+<pre class="snippet numbered"><ol class="snippet"><li value="1"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">A</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #6F42C1">Participant</span><span style="color: #24292E">(</span><span style="color: #032F62">'Flower_girl'</span><span style="color: #24292E">, {});</span></li><li value="2"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">B</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #6F42C1">API</span><span style="color: #24292E">(</span><span style="color: #032F62">'Flower'</span><span style="color: #24292E">, { girl2: </span><span style="color: #6F42C1">Fun</span><span style="color: #24292E">([UInt], Null) });</span></li></ol></pre>
 <h2 id="rep0000">REP0000</h2>
 <p>
   This error indicates that the body of a <code>while</code> loop does not make a publication before the <code>continue</code>
@@ -1370,3 +1395,27 @@
 <p>The error means that you use an API in two places in your program, which is not allowed.</p>
 <h2 id="rapi0003">RAPI0003</h2>
 <p>This error means that you did not return a result from an API call.</p>
+<h2 id="rw0000">RW0000</h2>
+<p>
+  This warning means the syntax or function you are trying to use is deprecated. It is still supported
+  by the Reach compiler, but future versions of Reach may stop supporting it.
+</p>
+<p>You can fix this warning by using the new syntax or function the message suggests.</p>
+<h2 id="rw0001">RW0001</h2>
+<p>
+  This warning indicates there is an issue with the Solidity compiler. The message provided can
+  be reported to Solidity.
+</p>
+<h2 id="rw0002">RW0002</h2>
+<p>
+  This warning indicates that your program either uses a feature that is not yet supported on Algorand
+  or surpasses Algorand's limit on resources.
+</p>
+<h2 id="rw0003">RW0003</h2>
+<p>
+  This warning indicates your program will not run on Algorand for the listed reasons. These
+  reasons include a limit on the total computation cost.
+</p>
+<h2 id="rw0004">RW0004</h2>
+<p>This warning indicates that your program does not contain any publications.</p>
+<p>You can fix this issue by making sure at least one <code>Participant</code> performs a <code>publish</code>.</p>

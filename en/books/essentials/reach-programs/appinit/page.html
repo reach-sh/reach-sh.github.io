@@ -67,9 +67,9 @@
 <p><code>participantInteractInterface</code> is a ${defn("participant interact interface")}, an object where each field indicates the type of a function or value which must be provided to the backend by the frontend for interacting with the participant.</p>
 <h3 id="api-definition">API Definition</h3>
 <p>${ref((quote rsh), "API")}</p>
-<pre class="snippet numbered"><ol class="snippet"><li value="1"><span style="color: #6F42C1">API</span><span style="color: #24292E">(</span><span style="color: #032F62">'Voter'</span><span style="color: #24292E">, { vote: </span><span style="color: #6F42C1">Fun</span><span style="color: #24292E">([Address], UInt) })</span></li></ol></pre>
+<pre class="snippet numbered"><ol class="snippet"><li value="1"><span style="color: #6F42C1">API</span><span style="color: #24292E">(</span><span style="color: #032F62">'Voter'</span><span style="color: #24292E">, { vote: </span><span style="color: #6F42C1">Fun</span><span style="color: #24292E">([Address], UInt) })</span></li><li value="2"><span style="color: #6A737D">// or</span></li><li value="3"><span style="color: #6F42C1">API</span><span style="color: #24292E">({ vote: </span><span style="color: #6F42C1">Fun</span><span style="color: #24292E">([Address], UInt) })</span></li></ol></pre>
 <p>
-  A API is defined with <code>API(apiName, apiInterface)</code>, where <code>apiName</code> is a string that labels the API and <code>apiInterface</code> is an object where each field indicates the type of a function provided by the contract as an API.
+  An API is defined with <code>API(apiName, apiInterface)</code> or <code>API(apiInterface)</code>, where <code>apiName</code> is a string that labels the API and <code>apiInterface</code> is an object where each field indicates the type of a function provided by the contract as an API.
   These APIs are available in frontends via the <code>ctc.apis</code> object.
   The value returned by this function is an object where the fields are the members of <code>apiInterface</code> are may be used in <code>.api</code> components of <code>fork</code> and <code>parallelReduce</code> to specify the behavior of the corresponding call.
   These are called ${defn("API member function")}s.
@@ -82,9 +82,9 @@
   :::
 </p>
 <p>${ref((quote rsh), "View")}</p>
-<pre class="snippet numbered"><ol class="snippet"><li value="1"><span style="color: #6F42C1">View</span><span style="color: #24292E">(</span><span style="color: #032F62">'NFT'</span><span style="color: #24292E">, { owner: Address })</span></li></ol></pre>
+<pre class="snippet numbered"><ol class="snippet"><li value="1"><span style="color: #6F42C1">View</span><span style="color: #24292E">(</span><span style="color: #032F62">'NFT'</span><span style="color: #24292E">, { owner: Address })</span></li><li value="2"><span style="color: #6A737D">// or</span></li><li value="3"><span style="color: #6F42C1">View</span><span style="color: #24292E">({ owner: Address })</span></li></ol></pre>
 <p>
-  A view is defined with <code>View(viewName, viewInterface)</code>, where <code>viewName</code> is a string that labels the view and <code>viewInterface</code> is an object where each field indicates the type of a function or value provided by the contract associated with the specified DApp.
+  A view is defined with <code>View(viewName, viewInterface)</code> or <code>View(viewInterface)</code>, where <code>viewName</code> is a string that labels the view and <code>viewInterface</code> is an object where each field indicates the type of a function or value provided by the contract associated with the specified DApp.
   These views are available in frontends via the <code>ctc.views</code> object.
   In the DApp, the result of this application argument is referred to as a view object.
 </p>

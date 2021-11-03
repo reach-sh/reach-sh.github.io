@@ -5,6 +5,16 @@
 <h2 id="016-202110---present">0.1.6: 2021/10 - present</h2>
 <p>Version 0.1.6 is the current Reach release candidate version.</p>
 <ul>
+  <li>2021/11/02: Allow <code>API</code>s and <code>View</code>s to be specified without names.</li>
+  <li>2021/10/28: <code>REACH_CONNECTOR_MODE</code> no longer defaults to <code>ETH</code> when unset.</li>
+</ul>
+<p>Users are instead encouraged to run <a href="##ref-usage-config">(exec reach config)</a> to set a persistent default in their shell or supply <code>REACH_CONNECTOR_MODE</code> explicitly at the command-line and in scripts.</p>
+<p>Attempting to <code>reach run|react|rpc-server|rpc-run|devnet</code> without setting <code>REACH_CONNECTOR_MODE</code> in one's terminal will result in an error message being shown and execution aborted.</p>
+<ul>
+  <li>2021/10/28: Added XXX (seclink "ref-usage-config" (exec "reach config") " subcommand").</li>
+  <li>2021/10/28: The backend interface to deployed contracts was updated, so old contracts will not work with this version.</li>
+  <li>2021/10/28: The backend interface to the compiled objects was updated, so you'll need to recompile for this release.</li>
+  <li>2021/10/20: Added <code>decimals</code> field for token minting.</li>
   <li>2021/10/18: Added APIs via the <code>API</code> form.</li>
   <li>2021/10/15: The backend interface to deployed contracts was updated, so old contracts will not work with this version.</li>
   <li>2021/10/15: The backend interface to the compiled objects was updated, so you'll need to recompile for this release.</li>
@@ -100,7 +110,7 @@
 <p>It is the last version that supports Algorand using TEAL3; if you deployed a contract on Algorand using Reach version 0.1.2, you will need to continue accessing it via the 0.1.2 version of the Reach standard library.</p>
 <ul>
   <li>2021/07/09: <code>.define</code> component added to <code>parallelReduce</code></li>
-  <li>2021/07/08: <a href="##ref-error-codes">Error code referenec</a> created</li>
+  <li>2021/07/08: <a href="##ref-error-codes">Error code reference</a> created</li>
   <li>2021/06/20: Token minting introduced, with implementation on ETH.</li>
   <li>... many interesting things ...</li>
   <li>2020/09/01: version tagged</li>

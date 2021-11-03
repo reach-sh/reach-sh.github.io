@@ -98,8 +98,7 @@
 <ul>
   <li>
     <p>
-      The environment variable <code>REACH_CONNECTOR_MODE</code> specifies which context to run in.
-      The default, if this variable is unset or empty, is <code>ETH-devnet</code>.
+      The mandatory environment variable <code>REACH_CONNECTOR_MODE</code> specifies which context to run in.
       The options are:
     </p>
   </li>
@@ -154,7 +153,10 @@
 <p><code>reach react</code> supports the following options:</p>
 <ul>
   <li>
-    <p>The environment variable <code>REACH_CONNECTOR_MODE</code> specifies which context to run in. The default, if this variable is unset or empty, is <code>ETH</code>. The options are:</p>
+    <p>
+      The mandatory environment variable <code>REACH_CONNECTOR_MODE</code> specifies which context to run in.
+      The options are:
+    </p>
   </li>
   <li>
     <p><code>ETH</code>, which runs a Dockerized private Ethereum network which may be used. The app can use any Ethereum network.</p>
@@ -193,7 +195,10 @@
     <p><code>--await-background</code> --- Run in background and await availability.</p>
   </li>
   <li>
-    <p>The environment variable <code>REACH_CONNECTOR_MODE</code> specifies which devnet to run. The default, if this variable is unset or empty, is <code>ETH</code>. The options are:</p>
+    <p>
+      The mandatory environment variable <code>REACH_CONNECTOR_MODE</code> specifies which devnet to run.
+      The options are:
+    </p>
   </li>
   <li>
     <p><code>ETH</code>, which runs an Ethereum devnet on <code>localhost:8545</code></p>
@@ -278,3 +283,12 @@
   This is more precise, but less readable, than <code>reach version</code>,
   in that each hash refers to the git commit used to build the image.
 </p>
+<h3 id="reach-config"><code>reach config</code></h3>
+<p>Reach recommends tuning your default workflow settings by executing</p>
+<pre class="snippet numbered"><ol class="snippet"><li value="1">$ reach config</li></ol></pre>
+<p>Using <code>reach config</code> is advisable when running Reach for the first time since it will set the <code>REACH_CONNECTOR_MODE</code> environment variable, which is required when executing some other sub-commands (e.g. <code>reach run</code>).</p>
+<p>
+  <code>reach config</code> presents users with a guided menu which automatically creates an <code>env</code> file and suggests subsequent steps to activate and make it permanent.
+  This <code>env</code> file exports environment variable settings and is intended to be <code>source</code>d by users' shells.
+</p>
+<p>If an <code>env</code> file already exists, <code>reach config</code> will offer to back it up before proceeding.</p>
