@@ -1,18 +1,15 @@
 {
-  "author": null,
   "background": "white",
-  "bookPath": "en/books/demo",
-  "bookTitle": "Demo Book",
-  "chapters": null,
   "hasOtp": true,
   "hasCustomBase": false,
-  "hasEditBtn": true,
   "hasPageHeader": true,
   "hasPageScrollbar": true,
+  "hasEditBtn": true,
   "hasRefreshBtn": true,
-  "menuItem": "mi-docs",
+  "bookTitle": "Demo Book",
+  "bookPath": "en/books/demo",
+  "chapters": null,
   "pages": null,
-  "pathname": "/Users/matt/repositories/reach-developer-portal/en/books/demo/birds/hummingbirds",
-  "publishedDate": null,
-  "title": "Hummingbirds"
+  "title": "Hummingbirds",
+  "pathname": "/Users/matt/repositories/reach-lang/docs/dev/src/en/books/demo/birds/hummingbirds"
 }

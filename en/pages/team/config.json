@@ -1,18 +1,14 @@
 {
-  "author": null,
   "background": "white",
-  "bookPath": null,
-  "bookTitle": null,
-  "chapters": null,
   "hasOtp": false,
   "hasCustomBase": false,
-  "hasEditBtn": true,
   "hasPageHeader": true,
   "hasPageScrollbar": true,
+  "hasEditBtn": true,
   "hasRefreshBtn": true,
-  "menuItem": "mi-team",
+  "chapters": null,
   "pages": null,
-  "pathname": "/Users/matt/repositories/reach-developer-portal/en/pages/team",
-  "publishedDate": null,
-  "title": "Team"
+  "menuItem": "mi-team",
+  "title": "Team",
+  "pathname": "/Users/matt/repositories/reach-lang/docs/dev/src/en/pages/team"
 }

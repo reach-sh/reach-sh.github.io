@@ -1,18 +1,14 @@
 {
-  "author": null,
   "background": "white",
-  "bookPath": null,
-  "bookTitle": null,
-  "chapters": null,
   "hasOtp": false,
   "hasCustomBase": false,
-  "hasEditBtn": false,
   "hasPageHeader": true,
   "hasPageScrollbar": true,
+  "hasEditBtn": false,
   "hasRefreshBtn": false,
-  "menuItem": null,
+  "chapters": null,
   "pages": null,
-  "pathname": "/Users/matt/repositories/reach-developer-portal/en/pages/account",
-  "publishedDate": null,
-  "title": "Account"
+  "hasScrollbar": false,
+  "title": "Account",
+  "pathname": "/Users/matt/repositories/reach-lang/docs/dev/src/en/pages/account"
 }

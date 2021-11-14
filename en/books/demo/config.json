@@ -1,18 +1,34 @@
 {
-  "author": null,
   "background": "white",
-  "bookPath": "en/books/demo",
-  "bookTitle": "Demo Book",
-  "chapters": null,
   "hasOtp": true,
   "hasCustomBase": false,
-  "hasEditBtn": true,
   "hasPageHeader": true,
   "hasPageScrollbar": true,
+  "hasEditBtn": true,
   "hasRefreshBtn": true,
-  "menuItem": "mi-docs",
+  "bookTitle": "Demo Book",
+  "bookPath": "en/books/demo",
+  "chapters": [
+    {
+      "Amphibians": "amphibians"
+    },
+    {
+      "Birds": "birds"
+    },
+    {
+      "Fish": "fish"
+    },
+    {
+      "Mammals": "mammals"
+    },
+    {
+      "Reptiles": "reptiles"
+    },
+    {
+      "Invertebrates": "invertebrates"
+    }
+  ],
   "pages": null,
-  "pathname": "/Users/matt/repositories/reach-developer-portal/en/books/demo",
-  "publishedDate": null,
-  "title": "Demo Book"
+  "title": "Demo Book",
+  "pathname": "/Users/matt/repositories/reach-lang/docs/dev/src/en/books/demo"
 }

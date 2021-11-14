@@ -1,18 +1,17 @@
 {
-  "author": null,
   "background": "white",
-  "bookPath": "en/books/essentials",
-  "bookTitle": "Reach Essentials",
-  "chapters": null,
   "hasOtp": true,
   "hasCustomBase": false,
-  "hasEditBtn": true,
   "hasPageHeader": true,
   "hasPageScrollbar": true,
+  "hasEditBtn": true,
   "hasRefreshBtn": true,
-  "menuItem": "mi-docs",
+  "bookTitle": "Reach Essentials",
+  "bookPath": "en/books/essentials",
+  "chapters": null,
   "pages": null,
-  "pathname": "/Users/matt/repositories/reach-developer-portal/en/books/essentials/reach-programs/javascript",
-  "publishedDate": null,
-  "title": "JavaScript"
+  "menuItem": "mi-docs",
+  "src": "ref-backends-js.md",
+  "title": "JavaScript",
+  "pathname": "/Users/matt/repositories/reach-lang/docs/dev/src/en/books/essentials/reach-programs/javascript"
 }

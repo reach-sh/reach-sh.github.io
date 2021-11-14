@@ -1,18 +1,13 @@
 {
-  "author": null,
   "background": "white",
-  "bookPath": null,
-  "bookTitle": null,
-  "chapters": null,
   "hasOtp": false,
   "hasCustomBase": false,
-  "hasEditBtn": true,
   "hasPageHeader": true,
   "hasPageScrollbar": true,
+  "hasEditBtn": true,
   "hasRefreshBtn": true,
-  "menuItem": null,
+  "chapters": null,
   "pages": null,
-  "pathname": "/Users/matt/repositories/reach-developer-portal/en/pages/events",
-  "publishedDate": null,
-  "title": "Events"
+  "title": "Events",
+  "pathname": "/Users/matt/repositories/reach-lang/docs/dev/src/en/pages/events"
 }
