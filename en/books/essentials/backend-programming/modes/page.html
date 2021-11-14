@@ -71,25 +71,47 @@
 </ul>
 <p>Below are descriptions of the permitted statements/expressions within Initialization:</p>
 <h2 id="api">API</h2>
-<p>An API is defined with <code>API(apiName, apiInterface)</code> or <code>API(apiInterface)</code>:</p>
-<pre class="snippet unnumbered"><ol class="snippet"><li value="1"><span style="color: #6F42C1">API</span><span style="color: #24292E">(</span><span style="color: #032F62">'Voter'</span><span style="color: #24292E">, { vote: </span><span style="color: #6F42C1">Fun</span><span style="color: #24292E">([Address], UInt) })</span></li><li value="2"><span style="color: #6F42C1">API</span><span style="color: #24292E">({ vote: </span><span style="color: #6F42C1">Fun</span><span style="color: #24292E">([Address], UInt) })</span></li></ol></pre>
-<p><code>apiName</code> is a string that labels the API and <code>apiInterface</code> is an object where each field indicates the type of a function provided by the contract as an API. These APIs are available in frontends via the <code>ctc.apis</code> object. The value returned by this function is an object where the fields are the members of apiInterface are may be used in .api components of fork and parallelReduce to specify the behavior of the corresponding call. These are called API member functions. Each function must occur exactly once in the entire program.</p>
+<p>An <code>API</code> expression defines an API in the contract.</p>
+<h3 id="declaration">Declaration</h3>
+<pre class="snippet unnumbered"><ol class="snippet"><li value="1"><span style="color: #6F42C1">API</span><span style="color: #24292E">(name, interface)</span></li><li value="2"><span style="color: #6A737D">// or </span></li><li value="3"><span style="color: #6F42C1">API</span><span style="color: #24292E">(interface)</span></li></ol></pre>
+<ul>
+  <li><code>name</code> is a string that labels the API.</li>
+  <li><code>interface</code> is an object where each field indicates the type of a function provided by the contract as an API. These APIs are available in frontends via the <code>ctc.apis</code> object. The value returned by this function is an object where the fields are the members of <code>interface</code>. The object may be used in the <code>.api</code> components of <code>fork</code> and <code>parallelReduce</code> expressions. Each object method must occur exactly once in the entire program.</li>
+</ul>
+<h3 id="example">Example</h3>
+<p>See <a href="https://github.com/reach-sh/reach-lang/blob/master/examples/api-full/index.rsh">examples/api-full/index.rsh</a>.</p>
 <h2 id="deploy">deploy</h2>
-<p>The <code>deploy()</code> statement deploys the DApp and finalizes all the available APIs, Participants, Views, and compilation options. Its continuation is a step, which means its content is specified by steps. It represents the body of the DApp to be compiled.</p>
+<p>The <code>deploy</code> statement defines Participants, Views, APIs, and compiler options, and transitions from Initialization mode to Step mode.</p>
+<h3 id="declaration-1">Declaration</h3>
+<pre class="snippet unnumbered"><ol class="snippet"><li value="1"><span style="color: #6F42C1">deploy</span><span style="color: #24292E">();</span></li></ol></pre>
 <h2 id="participant">Participant</h2>
-<p>A participant is declared with the following:</p>
-<pre class="snippet unnumbered"><ol class="snippet"><li value="1"><span style="color: #6F42C1">Participant</span><span style="color: #24292E">(participantName, participantInteractInterface)</span></li></ol></pre>
-<p><code>participantName</code> is a string which indicates the name of the participant function in the generated backend code. Each <code>participantName</code> must be unique.</p>
-<p><code>participantInteractInterface</code> is a participant interact interface, an object where each field indicates the type of a function or value which must be provided to the backend by the frontend for interacting with the participant.</p>
+<p>A <code>Participant</code> expression defines a participant.</p>
+<h3 id="declaration-2">Declaration</h3>
+<pre class="snippet unnumbered"><ol class="snippet"><li value="1"><span style="color: #6F42C1">Participant</span><span style="color: #24292E">(name, interface)</span></li></ol></pre>
+<ul>
+  <li><code>name</code> is a string indicating the name of the participant function in the generated backend code. Each name must be unique.</li>
+  <li><code>interface</code> is a participant interact interface, an object where each field indicates the type of a function or value which must be provided to the backend by the frontend for interacting with the participant.</li>
+</ul>
+<h3 id="example-1">Example</h3>
+<pre class="snippet unnumbered"><ol class="snippet"><li value="1"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">sellerInteract</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> {</span></li><li value="2"><span style="color: #24292E">  price: UInt,</span></li><li value="3"><span style="color: #24292E">  wisdom: </span><span style="color: #6F42C1">Bytes</span><span style="color: #24292E">(</span><span style="color: #005CC5">128</span><span style="color: #24292E">),</span></li><li value="4"><span style="color: #24292E">  reportReady: </span><span style="color: #6F42C1">Fun</span><span style="color: #24292E">([UInt], Null)</span></li><li value="5"><span style="color: #24292E">};</span></li><li value="6"></li><li value="7"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">S</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #6F42C1">Participant</span><span style="color: #24292E">(</span><span style="color: #032F62">'Seller'</span><span style="color: #24292E">, sellerInteract);</span></li></ol></pre>
 <h2 id="participantclass">ParticipantClass</h2>
-<p>A participant is declared with the following:</p>
-<pre class="snippet unnumbered"><ol class="snippet"><li value="1"><span style="color: #6F42C1">ParticipantClass</span><span style="color: #24292E">(participantName, participantInteractInterface)</span></li></ol></pre>
-<p><code>participantName</code> is a string which indicates the name of the participant function in the generated backend code. Each <code>participantName</code> must be unique.</p>
-<p><code>participantInteractInterface</code> is a participant interact interface, an object where each field indicates the type of a function or value which must be provided to the backend by the frontend for interacting with the participant.</p>
+<p>A <code>ParticipantClass</code> expression defines a type of participant.</p>
+<h3 id="declaration-3">Declaration</h3>
+<pre class="snippet unnumbered"><ol class="snippet"><li value="1"><span style="color: #6F42C1">ParticipantClass</span><span style="color: #24292E">(name, interface)</span></li></ol></pre>
+<ul>
+  <li><code>name</code> is a string which indicates the name of the participant class function in the generated backend code. Each name must be unique.</li>
+  <li><code>interface</code> is a participant class interact interface, an object where each field indicates the type of a function or value which must be provided to the backend by the frontend for interacting with the participants.</li>
+</ul>
+<h3 id="example-2">Example</h3>
+<pre class="snippet unnumbered"><ol class="snippet"><li value="1"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">sponsorApi</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> {</span></li><li value="2"><span style="color: #24292E">  donation: UInt,</span></li><li value="3"><span style="color: #24292E">  reportDonation: </span><span style="color: #6F42C1">Fun</span><span style="color: #24292E">([Address, UInt, UInt, UInt, UInt], Null),</span></li><li value="4"><span style="color: #24292E">};</span></li><li value="5"></li><li value="6"><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">S</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #6F42C1">ParticipantClass</span><span style="color: #24292E">(</span><span style="color: #032F62">'Sponsor'</span><span style="color: #24292E">, sponsorApi);</span></li></ol></pre>
 <h2 id="setoptions">setOptions</h2>
-<p>The <code>setOptions({})</code> statement overrides default application parameters. Here is an example:</p>
-<pre class="snippet unnumbered"><ol class="snippet"><li value="1"><span style="color: #6F42C1">setOptions</span><span style="color: #24292E">({ verifyArithmetic: </span><span style="color: #005CC5">true</span><span style="color: #24292E">, connectors: [</span><span style="color: #005CC5">ETH</span><span style="color: #24292E">, </span><span style="color: #005CC5">ALGO</span><span style="color: #24292E"> ] });</span></li></ol></pre>
-<p>Possible options include the following:</p>
+<p>The <code>setOptions</code> statement overrides default application parameters.</p>
+<h3 id="declaration-4">Declaration</h3>
+<pre class="snippet unnumbered"><ol class="snippet"><li value="1"><span style="color: #6F42C1">setOptions</span><span style="color: #24292E">(options)</span></li></ol></pre>
+<ul>
+  <li><code>options</code> is an object containing options and values</li>
+</ul>
+<p>The options object supports the following key:value pairs:</p>
 <table>
   <thead>
     <tr>
@@ -102,7 +124,7 @@
     <tr>
       <td><code>connectors</code></td>
       <td><code>Array</code></td>
-      <td><code>[ALGO, ETH]</code></td>
+      <td>All available connectors</td>
     </tr>
     <tr>
       <td><code>verifyArithmetic</code></td>
@@ -116,16 +138,22 @@
     </tr>
   </tbody>
 </table>
-<p>Descriptions:</p>
-<ul>
-  <li><em>connectors</em>. A tuple of the connectors that the application should be compiled for. By default, all available connectors are chosen.</li>
-  <li><em>verifyArithmetic</em>. Determines whether arithmetic operations automatically introduce static assertions that they do not overflow beyond UInt.max. This defaults to false, because it is onerous to verify. We recommend turning it on before final deployment, but leaving it off during development. When it is false, connectors will ensure that overflows do not actually occur on the network.</li>
-  <li><em>verifyPerConnector</em>. Determines whether verification is done per connector, or once for a generic connector. When this is true, then connector-specific constants, like UInt.max, will be instantiated to literal numbers. This concretization of these constants can induce performance degradation in the verifier.</li>
-</ul>
+<p><code>connectors</code> is an array of tuples indicating for which consensus networks the compiler will generate contract bytecode.</p>
+<p><code>verifyArithmetic</code> is a boolean value indicating whether arithmetic operations introduce static assertions that they do not overflow beyond UInt.max. This defaults to false because it is onerous to verify. We recommend turning it on before final deployment, but leaving it off during development. When it is false, connectors will ensure that overflows do not actually occur on the network.</p>
+<p><code>verifyPerConnector</code> is a boolean value that determines whether verification is done per connector, or once for a generic connector. When this is true, then connector-specific constants, like UInt.max, will be instantiated to literal numbers. This concretization of these constants can induce performance degradation in the verifier.</p>
+<h3 id="example-3">Example</h3>
+<pre class="snippet unnumbered"><ol class="snippet"><li value="1"><span style="color: #6F42C1">setOptions</span><span style="color: #24292E">({ verifyArithmetic: </span><span style="color: #005CC5">true</span><span style="color: #24292E">, connectors: [</span><span style="color: #005CC5">ETH</span><span style="color: #24292E">, </span><span style="color: #005CC5">ALGO</span><span style="color: #24292E"> ] });</span></li></ol></pre>
 <h2 id="view">View</h2>
-<p>A view is defined with <code>View(viewName, viewInterface)</code> or <code>View(viewInterface)</code>:</p>
-<pre class="snippet unnumbered"><ol class="snippet"><li value="1"><span style="color: #6F42C1">View</span><span style="color: #24292E">(</span><span style="color: #032F62">'NFT'</span><span style="color: #24292E">, { owner: Address })</span></li><li value="2"><span style="color: #6F42C1">View</span><span style="color: #24292E">({ owner: Address })</span></li></ol></pre>
-<p><code>viewName</code> is a string that labels the view and <code>viewInterface</code> is an object where each field indicates the type of a function or value provided by the contract associated with the specified DApp. These views are available in frontends via the ctc.views object. In the DApp, the result of this application argument is referred to as a view object.</p>
+<p>A View expression defines a view object that allows non-participants to see public variables in the contract.</p>
+<h3 id="declaration-5">Declaration</h3>
+<pre class="snippet unnumbered"><ol class="snippet"><li value="1"><span style="color: #6F42C1">View</span><span style="color: #24292E">(name, viewInterface)</span></li><li value="2"><span style="color: #6A737D">// or</span></li><li value="3"><span style="color: #6F42C1">View</span><span style="color: #24292E">(viewInterface)</span></li></ol></pre>
+<ul>
+  <li><code>name</code> is a string that labels the view.</li>
+  <li><code>interface</code> is an object where each field indicates the type of a function or value provided by the contract associated with the specified DApp. These views are available in frontends via the <code>ctc.views</code> object. In the DApp, the result of this argument is referred to as a <code>view</code> object.</li>
+</ul>
+<h3 id="example-4">Example</h3>
+<p>The program instantiates the view in Line 4 and initializes the <code>price</code> property in Line 10:</p>
+<pre class="snippet numbered"><ol class="snippet"><li value="1"><span style="color: #D73A49">export</span><span style="color: #24292E"> </span><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">main</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> Reach.</span><span style="color: #6F42C1">App</span><span style="color: #24292E">(() </span><span style="color: #D73A49">=&gt;</span><span style="color: #24292E"> {</span></li><li value="2"><span style="color: #24292E">  </span><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">S</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #6F42C1">Participant</span><span style="color: #24292E">(</span><span style="color: #032F62">'Seller'</span><span style="color: #24292E">, sellerInteract);</span></li><li value="3"><span style="color: #24292E">  </span><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">B</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #6F42C1">Participant</span><span style="color: #24292E">(</span><span style="color: #032F62">'Buyer'</span><span style="color: #24292E">, buyerInteract);</span></li><li value="4"><span style="color: #24292E">  </span><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">V</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #6F42C1">View</span><span style="color: #24292E">(</span><span style="color: #032F62">'Main'</span><span style="color: #24292E">, { price: UInt });</span></li><li value="5"><span style="color: #24292E">  </span><span style="color: #6F42C1">deploy</span><span style="color: #24292E">();</span></li><li value="6"></li><li value="7"><span style="color: #24292E">  </span><span style="color: #005CC5">S</span><span style="color: #24292E">.</span><span style="color: #6F42C1">only</span><span style="color: #24292E">(() </span><span style="color: #D73A49">=&gt;</span><span style="color: #24292E"> { </span><span style="color: #D73A49">const</span><span style="color: #24292E"> </span><span style="color: #005CC5">price</span><span style="color: #24292E"> </span><span style="color: #D73A49">=</span><span style="color: #24292E"> </span><span style="color: #6F42C1">declassify</span><span style="color: #24292E">(interact.price); });</span></li><li value="8"><span style="color: #24292E">  </span><span style="color: #005CC5">S</span><span style="color: #24292E">.</span><span style="color: #6F42C1">publish</span><span style="color: #24292E">(price);</span></li><li value="9"><span style="color: #24292E">  </span><span style="color: #005CC5">S</span><span style="color: #24292E">.interact.</span><span style="color: #6F42C1">reportReady</span><span style="color: #24292E">(price);</span></li><li value="10"><span style="color: #24292E">  </span><span style="color: #005CC5">V</span><span style="color: #24292E">.price.</span><span style="color: #6F42C1">set</span><span style="color: #24292E">(price);</span></li><li value="11"><span style="color: #24292E">  </span><span style="color: #6F42C1">commit</span><span style="color: #24292E">();</span></li></ol></pre>
 <h1 id="step">Step</h1>
 <p>Actions that apply to all participants occur within a step. Below are descriptions of the permitted statements/expressions within a Step:</p>
 <h2 id="call">call</h2>
