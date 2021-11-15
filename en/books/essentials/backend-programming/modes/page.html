@@ -326,9 +326,9 @@
 <h3 id="declaration-32">Declaration</h3>
 <pre class="snippet unnumbered"><ol class="snippet"><li value="1"><span style="color: #6F42C1">transfer</span><span style="color: #24292E">(</span><span style="color: #005CC5">AMOUNT_EXPR</span><span style="color: #24292E">).</span><span style="color: #6F42C1">to</span><span style="color: #24292E">(</span><span style="color: #005CC5">ADDR_EXPR</span><span style="color: #24292E">)</span></li><li value="2"><span style="color: #6A737D">// or</span></li><li value="3"><span style="color: #6F42C1">transfer</span><span style="color: #24292E">(</span><span style="color: #005CC5">AMOUNT_EXPR</span><span style="color: #24292E">, </span><span style="color: #005CC5">TOKEN_EXPR</span><span style="color: #24292E">).</span><span style="color: #6F42C1">to</span><span style="color: #24292E">(</span><span style="color: #005CC5">ADDR_EXPR</span><span style="color: #24292E">)</span></li></ol></pre>
 <ul>
-  <li>AMOUNT_EXPR is an unsigned integer specifying the number of tokens to transfer from the contract. This amount must evaluate to less than or equal to the balance of network tokens in the contract account.</li>
-  <li>ADDR_EXPR is the target address for the transfer.</li>
-  <li>TOKEN_EXPR is a Token type. This argument is optional.</li>
+  <li><code>AMOUNT_EXPR</code> is an unsigned integer specifying the number of tokens to transfer from the contract. This amount must evaluate to less than or equal to the balance of network tokens in the contract account.</li>
+  <li><code>ADDR_EXPR</code> is the target address for the transfer.</li>
+  <li><code>TOKEN_EXPR</code> is a Token type. This argument is optional.</li>
 </ul>
 <h3 id="example-31">Example</h3>
 <pre class="snippet unnumbered"><ol class="snippet"><li value="1"><span style="color: #6F42C1">transfer</span><span style="color: #24292E">(</span><span style="color: #005CC5">10</span><span style="color: #24292E">).</span><span style="color: #6F42C1">to</span><span style="color: #24292E">(Alice);</span></li></ol></pre>
