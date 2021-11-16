@@ -1,3 +1,6 @@
+<h1 id="assertion">Assertion</h1>
+<p>An assertion is either: a knowledge assertion, which is a claim that one honest participant cannot know something that another honest participant does know; a static assertion, which is an always-true formula; an assumption, which is a true formula if frontends behave honestly; a requirement, which is a true formula if participants behave honestly; or, a possibility assertion, which is a formula for which there exists some values that honest participants and frontends could submit which results in the truth of the formula. An honest participant is one that executes the steps specified by the DApp, while an honest frontend is one that only returns values which ensure that all assumptions evaluate to the boolean true.</p>
+<h1 id="linear-state">Linear State</h1>
 <h1 id="pay-amount">Pay Amount</h1>
 <p>A pay amount is either:</p>
 <ul>
@@ -20,3 +23,5 @@
 <pre class="snippet unnumbered"><ol class="snippet"><li value="1">.paySpec([tokA, tokB])</li></ol></pre>
 <p>will indicate that fork payments should be of the format:</p>
 <pre class="snippet unnumbered"><ol class="snippet"><li value="1">[ NETWORK_TOKEN_AMT, [ amtA, tokA ], [ amtB, tokB ] ]</li></ol></pre>
+<h1 id="time-argument">Time Argument</h1>
+<p>A time argument represents consensus-network time. The argument is of type <code>Either(UInt, UInt)</code>, where the left variant refers to absolute network time and the right variant refers to absolute network seconds.</p>
